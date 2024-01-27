@@ -78,7 +78,7 @@ function createApp(database: Database) {
   }
 
   function isMonday(date: Date) {
-    return date.getDay() === 1;
+    return dateToTemporal(date).dayOfWeek === 1;
   }
 
   function isHoliday(date: Date | undefined) {
@@ -95,6 +95,11 @@ function createApp(database: Database) {
       }
     }
     return false;
+  }
+
+  function dateToTemporal(date: Date): Temporal.PlainDate {
+    //@ts-ignore
+    return date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate();
   }
 
   return app;
