@@ -71,22 +71,21 @@ function createApp(database: Database) {
 
   function calculateReduction(date: Date | undefined) {
     let reduction = 0;
-    if (date && isMonday(date) && !isHoliday(date)) {
+    if (date && isMonday(dateToTemporal(date)) && !isHoliday(date)) {
       reduction = 35;
     }
     return reduction;
   }
 
-  function isMonday(date: Date) {
-    return dateToTemporal(date).dayOfWeek === 1;
+  function isMonday(date: Temporal.PlainDate) {
+    return date.dayOfWeek === 1;
   }
 
-  function isHoliday(date: Date | undefined) {
+  function isHoliday(date: Date) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = new Date(row.holiday);
       if (
-        date &&
         date.getFullYear() === holiday.getFullYear() &&
         date.getMonth() === holiday.getMonth() &&
         date.getDate() === holiday.getDate()
