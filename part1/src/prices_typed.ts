@@ -22,7 +22,7 @@ function createApp(database: Database) {
     const baseCost = database.findBasePriceByType(type)!.cost;
     const date = parseDate(req.query.date as string);
     const date2 = parsePlainDate(req.query.date as string);
-    const cost = calculateCost(age, type, date, baseCost, date2);
+    const cost = calculateCost(age, type, date2, baseCost);
     res.json({ cost });
   });
 
@@ -41,14 +41,13 @@ function createApp(database: Database) {
   function calculateCost(
     age: number | undefined,
     type: string,
-    date: Date | undefined,
+    date: Temporal.PlainDate | undefined,
     baseCost: number,
-    date2: Temporal.PlainDate | undefined,
   ) {
     if (type === "night") {
       return calculateCostForNightTicket(age, baseCost);
     } else {
-      return calculateCostForDayTicket(age, date, baseCost, date2);
+      return calculateCostForDayTicket(age, date, baseCost);
     }
   }
 
@@ -65,13 +64,8 @@ function createApp(database: Database) {
     return baseCost;
   }
 
-  function calculateCostForDayTicket(
-    age: number | undefined,
-    date: Date | undefined,
-    baseCost: number,
-    date2: Temporal.PlainDate | undefined,
-  ) {
-    let reduction = calculateReduction(date, date2);
+  function calculateCostForDayTicket(age: number | undefined, date: Temporal.PlainDate | undefined, baseCost: number) {
+    let reduction = calculateReduction(date);
     if (age === undefined) {
       return Math.ceil(baseCost * (1 - reduction / 100));
     }
@@ -87,9 +81,9 @@ function createApp(database: Database) {
     return Math.ceil(baseCost * (1 - reduction / 100));
   }
 
-  function calculateReduction(date: Date | undefined, date2: Temporal.PlainDate | undefined) {
+  function calculateReduction(date: Temporal.PlainDate | undefined) {
     let reduction = 0;
-    if (date && date2 && isMonday(date2) && !isHoliday(date2)) {
+    if (date && isMonday(date) && !isHoliday(date)) {
       reduction = 35;
     }
     return reduction;
