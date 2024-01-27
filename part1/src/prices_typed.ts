@@ -21,13 +21,13 @@ function createApp(database: Database) {
     const type = req.query.type as string;
     const baseCost = database.findBasePriceByType(type)!.cost;
     const date = parseDate(req.query.date as string);
-    const cost = calculateCost(age, type, dateToTemporal(date), baseCost);
+    const cost = calculateCost(age, type, date, baseCost);
     res.json({ cost });
   });
 
-  function parseDate(dateString: string | undefined): Date | undefined {
+  function parseDate(dateString: string | undefined): Temporal.PlainDate | undefined {
     if (dateString) {
-      return new Date(dateString);
+      return Temporal.PlainDate.from(dateString);
     }
   }
 
@@ -95,11 +95,6 @@ function createApp(database: Database) {
       }
     }
     return false;
-  }
-
-  function dateToTemporal(date: Date | undefined): Temporal.PlainDate | undefined {
-    //@ts-ignore
-    return date ? date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate() : undefined;
   }
 
   return app;
