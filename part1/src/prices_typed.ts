@@ -53,7 +53,7 @@ function createApp(database: Database) {
   }
 
   function calculateCostForDayTicket(age: number | undefined, date: Date | undefined, baseCost: number) {
-    let reduction = calculateReduction(date);
+    let reduction = calculateReduction(dateToTemporal(date));
     if (age === undefined) {
       return Math.ceil(baseCost * (1 - reduction / 100));
     }
@@ -69,9 +69,9 @@ function createApp(database: Database) {
     return Math.ceil(baseCost * (1 - reduction / 100));
   }
 
-  function calculateReduction(date: Date | undefined) {
+  function calculateReduction(date: Temporal.PlainDate | undefined) {
     let reduction = 0;
-    if (date && isMonday(dateToTemporal(date)) && !isHoliday(date)) {
+    if (date && isMonday(date) && !isHoliday(date)) {
       reduction = 35;
     }
     return reduction;
@@ -81,8 +81,7 @@ function createApp(database: Database) {
     return date.dayOfWeek === 1;
   }
 
-  function isHoliday(date: Date) {
-    date = dateToTemporal(date);
+  function isHoliday(date: Temporal.PlainDate) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = Temporal.PlainDate.from(row.holiday);
@@ -93,9 +92,9 @@ function createApp(database: Database) {
     return false;
   }
 
-  function dateToTemporal(date: Date): Temporal.PlainDate {
+  function dateToTemporal(date: Date | undefined): Temporal.PlainDate | undefined {
     //@ts-ignore
-    return date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate();
+    return date ? date.toTemporalInstant().toZonedDateTimeISO("UTC").toPlainDate() : undefined;
   }
 
   return app;
