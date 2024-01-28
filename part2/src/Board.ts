@@ -16,6 +16,10 @@ export class Board {
     this.shapeColumn = 1;
   }
 
+  tick() {
+    this.shapeRow += 1;
+  }
+
   toString(): string {
     let boardString = "";
     for (let i = 0; i < this.height; i++) {

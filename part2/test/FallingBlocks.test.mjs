@@ -29,8 +29,7 @@ describe("Falling blocks", () => {
       );
     });
 
-    /*
-    test.skip("it moves down one row per tick", () => {
+    test("it moves down one row per tick", () => {
       board.tick();
 
       expect(board.toString()).to.equalShape(
@@ -46,7 +45,6 @@ describe("Falling blocks", () => {
       const after = board.toString();
       expect(after).to.equal(before);
     });
-    */
   });
 
   /*
