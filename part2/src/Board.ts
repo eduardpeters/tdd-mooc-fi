@@ -24,7 +24,9 @@ export class Board {
   }
 
   tick() {
-    this.shapeRow += 1;
+    if (this.shapeRow < this.height - 1) {
+      this.shapeRow += 1;
+    }
   }
 
   toString(): string {
