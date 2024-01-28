@@ -11,6 +11,9 @@ export class Board {
   }
 
   drop(shape: string) {
+    if (this.shape.length > 0) {
+      throw new Error("already falling");
+    }
     this.shape = shape;
     this.shapeRow = 0;
     this.shapeColumn = 1;
