@@ -23,6 +23,10 @@ export class Board {
     return this.shape.length > 0;
   }
 
+  canFall() {
+    return this.shapeRow < this.height - 1 && this.matrix[this.shapeRow + 1][this.shapeColumn] === ".";
+  }
+
   drop(shape: string) {
     if (this.hasFalling()) {
       throw new Error("already falling");
@@ -34,7 +38,7 @@ export class Board {
   }
 
   tick() {
-    if (this.shapeRow < this.height - 1 && this.matrix[this.shapeRow + 1][this.shapeColumn] === ".") {
+    if (this.hasFalling() && this.canFall()) {
       this.matrix[this.shapeRow][this.shapeColumn] = ".";
       this.shapeRow += 1;
       this.matrix[this.shapeRow][this.shapeColumn] = this.shape;
