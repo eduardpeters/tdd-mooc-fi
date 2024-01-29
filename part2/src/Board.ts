@@ -9,7 +9,12 @@ export class Board {
   constructor(width: number, height: number) {
     this.width = width;
     this.height = height;
-    this.matrix = Array(height).fill(Array(width).fill("."));
+    this.matrix = [];
+    for (let i = 0; i < height; i++) {
+      let row = [];
+      for (let j = 0; j < width; j++) row.push(".");
+      this.matrix.push(row);
+    }
   }
 
   hasFalling() {
@@ -23,13 +28,15 @@ export class Board {
     this.shape = shape;
     this.shapeRow = 0;
     this.shapeColumn = 1;
+    this.matrix[this.shapeRow][this.shapeColumn] = this.shape;
   }
 
   tick() {
     if (this.shapeRow < this.height - 1) {
+      this.matrix[this.shapeRow][this.shapeColumn] = ".";
       this.shapeRow += 1;
-    } else {
       this.matrix[this.shapeRow][this.shapeColumn] = this.shape;
+    } else {
       this.shape = "";
     }
   }
@@ -38,11 +45,7 @@ export class Board {
     let boardString = "";
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
-        if (this.shape.length > 0 && this.shapeRow === i && this.shapeColumn === j) {
-          boardString += this.shape;
-        } else {
-          boardString += this.matrix[i][j];
-        }
+        boardString += this.matrix[i][j];
       }
       boardString += "\n";
     }
