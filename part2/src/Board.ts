@@ -34,7 +34,7 @@ export class Board {
   }
 
   tick() {
-    if (this.shapeRow < this.height - 1) {
+    if (this.shapeRow < this.height - 1 && this.matrix[this.shapeRow + 1][this.shapeColumn] === ".") {
       this.matrix[this.shapeRow][this.shapeColumn] = ".";
       this.shapeRow += 1;
       this.matrix[this.shapeRow][this.shapeColumn] = this.shape;
