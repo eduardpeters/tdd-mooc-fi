@@ -23,9 +23,13 @@ export class RotatingShape {
 
   rotateLeft(): RotatingShape {
     const rows = this.shape.split("\n");
-    let rotated = `${rows[0][2]}${rows[1][2]}${rows[2][2]}\n`;
-    rotated += `${rows[0][1]}${rows[1][1]}${rows[2][1]}\n`;
-    rotated += `${rows[0][0]}${rows[1][0]}${rows[2][0]}`;
+    let rotated = "";
+    for (let i = rows[0].length - 1; i >= 0; i--) {
+      for (let j = 0; j < rows.length; j++) {
+        rotated += rows[j][i];
+      }
+      if (i !== 0) rotated += "\n";
+    }
     return new RotatingShape(rotated);
   }
 }
