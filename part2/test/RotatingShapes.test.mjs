@@ -3,11 +3,7 @@ import { expect } from "chai";
 import { RotatingShape } from "../src/RotatingShape.ts";
 
 describe("Rotating 3x3 shape", () => {
-  const shape = new RotatingShape(
-    `ABC
-     DEF
-     GHI`
-  );
+  const shape = new RotatingShape(`ABC\nDEF\nGHI`);
 
   test("initial orientation", () => {
     expect(shape.toString()).to.equalShape(
