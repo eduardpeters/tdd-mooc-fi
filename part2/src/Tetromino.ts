@@ -1,6 +1,16 @@
 import { RotatingShape } from "./RotatingShape";
 
 export class Tetromino {
-  static T_SHAPE = new RotatingShape(`.T.\nTTT\n...`);
-  static I_SHAPE = new RotatingShape(`.....\n.....\nIIII.\n.....\n.....`);
+  shape: RotatingShape;
+
+  static T_SHAPE = new Tetromino(`.T.\nTTT\n...`);
+  static I_SHAPE = new Tetromino(`.....\n.....\nIIII.\n.....\n.....`);
+
+  constructor(shape: string) {
+    this.shape = new RotatingShape(shape);
+  }
+
+  toString() {
+    return this.shape.toString();
+  }
 }
