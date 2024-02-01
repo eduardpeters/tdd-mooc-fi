@@ -7,11 +7,14 @@ export class Tetromino {
   static T_SHAPE = new Tetromino(`.T.\nTTT\n...`, 4);
   static I_SHAPE = new Tetromino(`.....\n.....\nIIII.\n.....\n.....`, 2);
 
-  constructor(shape: string, orientationCount: number) {
-    this.orientations = [new RotatingShape(shape)];
-    this.currentOrientation = 0;
-    for (let i = 1; i < orientationCount; i++) {
-      this.orientations.push(this.orientations[i]);
+  constructor(shape: string, orientationCount: number, orientations: RotatingShape[] = [], currentOrientation = 0) {
+    this.orientations = orientations;
+    this.currentOrientation = currentOrientation;
+    if (this.orientations.length === 0) {
+      this.orientations = [new RotatingShape(shape)];
+      for (let i = 1; i < orientationCount; i++) {
+        this.orientations.push(this.orientations[i]);
+      }
     }
   }
 
