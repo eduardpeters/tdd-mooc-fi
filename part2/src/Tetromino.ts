@@ -26,7 +26,8 @@ export class Tetromino {
   }
 
   rotateLeft() {
-    return this.orientations[this.currentOrientation].rotateLeft();
+    const orientationIndex = (this.currentOrientation - 1 + this.orientations.length) % this.orientations.length;
+    return new Tetromino(this.shape, this.orientations.length, this.orientations, orientationIndex);
   }
 
   toString() {
