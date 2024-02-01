@@ -50,7 +50,7 @@ describe("The T shape", () => {
 describe("The I shape", () => {
   const shape = Tetromino.I_SHAPE;
 
-  test.skip("initial orientation", () => {
+  test("initial orientation", () => {
     expect(shape.toString()).to.equalShape(
       `.....
        .....
@@ -60,7 +60,7 @@ describe("The I shape", () => {
     );
   });
 
-  test.skip("can be rotated right/clockwise", () => {
+  test("can be rotated right/clockwise", () => {
     expect(shape.rotateRight().toString()).to.equalShape(
       `..I..
        ..I..

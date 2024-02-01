@@ -1,6 +1,7 @@
 import { RotatingShape } from "./RotatingShape";
 
 export class Tetromino {
+  shape: string;
   orientations: RotatingShape[];
   currentOrientation: number;
 
@@ -8,18 +9,20 @@ export class Tetromino {
   static I_SHAPE = new Tetromino(`.....\n.....\nIIII.\n.....\n.....`, 2);
 
   constructor(shape: string, orientationCount: number, orientations: RotatingShape[] = [], currentOrientation = 0) {
+    this.shape = shape;
     this.orientations = orientations;
     this.currentOrientation = currentOrientation;
     if (this.orientations.length === 0) {
       this.orientations = [new RotatingShape(shape)];
-      for (let i = 1; i < orientationCount; i++) {
-        this.orientations.push(this.orientations[i]);
+      for (let i = 0; i < orientationCount - 1; i++) {
+        this.orientations.push(this.orientations[i].rotateRight());
       }
     }
   }
 
   rotateRight() {
-    return this.orientations[this.currentOrientation].rotateRight();
+    const orientationIndex = (this.currentOrientation + 1) % this.orientations.length;
+    return new Tetromino(this.shape, this.orientations.length, this.orientations, orientationIndex);
   }
 
   rotateLeft() {
