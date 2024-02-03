@@ -60,6 +60,15 @@ export class Board {
     }
   }
 
+  drawShape() {
+    if (this.shape === undefined) return;
+    for (let i = 0; i< this.shape.size; i++) {
+      for (let j = 0; j < this.shape.size; j++) {
+        this.matrix[this.shapeRow + i][this.shapeColumn + j] = this.shape.toString();
+      }
+    }
+  }
+
   toString(): string {
     let boardString = "";
     for (let i = 0; i < this.height; i++) {
