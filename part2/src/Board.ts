@@ -1,8 +1,10 @@
+import { Tetromino } from "./Tetromino";
+
 export class Board {
   width;
   height;
   matrix;
-  shape = "";
+  shape: string | Tetromino;
   shapeRow = 0;
   shapeColumn = 0;
 
@@ -20,7 +22,13 @@ export class Board {
   }
 
   hasFalling() {
-    return this.shape.length > 0;
+    if (this.shape !== undefined) {
+      if (typeof this.shape === 'string') {
+        return this.shape.length > 0;
+      }
+      return this.shape.shape.length > 0;
+    }
+    return false;
   }
 
   canFall() {
