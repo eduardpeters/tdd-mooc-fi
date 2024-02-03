@@ -2,6 +2,7 @@ import { RotatingShape } from "./RotatingShape";
 
 export class Tetromino {
   shape: string;
+  size: number;
   orientations: RotatingShape[];
   currentOrientation: number;
 
@@ -19,6 +20,7 @@ export class Tetromino {
         this.orientations.push(this.orientations[i].rotateRight());
       }
     }
+    this.size = this.orientations[currentOrientation].size;
   }
 
   rotateRight() {

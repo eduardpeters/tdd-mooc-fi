@@ -1,8 +1,10 @@
 export class RotatingShape {
   shape: string;
+  size: number;
 
   constructor(shape: string) {
     this.shape = shape;
+    this.size = shape.split('\n').length;
   }
 
   toString() {

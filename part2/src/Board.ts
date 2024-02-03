@@ -44,6 +44,7 @@ export class Board {
     }
     this.shapeRow = 0;
     this.shapeColumn = 1;
+    console.log(this.shape.size);
     this.matrix[this.shapeRow][this.shapeColumn] = this.shape.shape;
   }
 
