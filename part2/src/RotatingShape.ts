@@ -1,10 +1,21 @@
 export class RotatingShape {
   shape: string;
   size: number;
+  matrix: string[][];
 
   constructor(shape: string) {
     this.shape = shape;
-    this.size = shape.split('\n').length;
+    const newMatrix: string[][] = [];
+    const rows = this.shape.split("\n");
+    for (let i = 0; i < rows.length; i++) {
+      newMatrix.push([]);
+      const chars = rows[i].split('');
+      for (let j = 0; j < chars.length; j++) {
+        newMatrix[i].push(chars[j]);
+      }
+    } 
+    this.matrix = newMatrix;
+    this.size = newMatrix.length;
   }
 
   toString() {
