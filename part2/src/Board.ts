@@ -1,10 +1,11 @@
+import { RotatingShape } from "./RotatingShape";
 import { Tetromino } from "./Tetromino";
 
 export class Board {
   width;
   height;
   matrix;
-  shape: string | Tetromino;
+  shape: Tetromino | RotatingShape | undefined;
   shapeRow = 0;
   shapeColumn = 0;
 
@@ -23,9 +24,6 @@ export class Board {
 
   hasFalling() {
     if (this.shape !== undefined) {
-      if (typeof this.shape === 'string') {
-        return this.shape.length > 0;
-      }
       return this.shape.shape.length > 0;
     }
     return false;
@@ -39,19 +37,23 @@ export class Board {
     if (this.hasFalling()) {
       throw new Error("already falling");
     }
+    if (typeof shape === 'string') {
+      this.shape = new RotatingShape(shape);
+    } else {
     this.shape = shape;
+    }
     this.shapeRow = 0;
     this.shapeColumn = 1;
-    this.matrix[this.shapeRow][this.shapeColumn] = this.shape;
+    this.matrix[this.shapeRow][this.shapeColumn] = this.shape.shape;
   }
 
   tick() {
     if (this.hasFalling() && this.canFall()) {
       this.matrix[this.shapeRow][this.shapeColumn] = ".";
       this.shapeRow += 1;
-      this.matrix[this.shapeRow][this.shapeColumn] = this.shape;
+      this.matrix[this.shapeRow][this.shapeColumn] = this.shape.shape;
     } else {
-      this.shape = "";
+      this.shape = undefined;
     }
   }
 
