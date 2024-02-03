@@ -43,8 +43,10 @@ export class Board {
     this.shape = shape;
     }
     this.shapeRow = 0;
-    this.shapeColumn = 1;
-    console.log(this.shape.size);
+    this.shapeColumn = Math.floor(this.width / 2) - Math.floor(this.shape.size / 2);
+    if (this.width % 2 === 0) {
+      this.shapeColumn -= 1;
+    }
     this.matrix[this.shapeRow][this.shapeColumn] = this.shape.shape;
   }
 
