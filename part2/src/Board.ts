@@ -52,9 +52,9 @@ export class Board {
 
   tick() {
     if (this.hasFalling() && this.canFall()) {
-      this.matrix[this.shapeRow][this.shapeColumn] = ".";
+      this.clearShape();
       this.shapeRow += 1;
-      this.matrix[this.shapeRow][this.shapeColumn] = this.shape.shape;
+      this.drawShape();
     } else {
       this.shape = undefined;
     }
@@ -69,6 +69,15 @@ export class Board {
     for (let i = 0; i < this.shape.size; i++) {
       for (let j = 0; j < this.shape.size; j++) {
         this.matrix[this.shapeRow + i][this.shapeColumn + j] = matrixReference[i][j];
+      }
+    }
+  }
+  
+  clearShape() {
+    if (this.shape === undefined) return;
+    for (let i = 0; i < this.shape.size; i++) {
+      for (let j = 0; j < this.shape.size; j++) {
+        this.matrix[this.shapeRow + i][this.shapeColumn + j] = '.';
       }
     }
   }
