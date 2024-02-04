@@ -6,7 +6,7 @@ export class RotatingShape {
   constructor(shape: string) {
     this.shape = shape;
     const newMatrix: string[][] = [];
-    const rows = this.shape.split("\n");
+    const rows = shape.split("\n");
     for (let i = 0; i < rows.length; i++) {
       newMatrix.push([]);
       const chars = rows[i].split('');
@@ -19,7 +19,14 @@ export class RotatingShape {
   }
 
   toString() {
-    return this.shape + "\n";
+    let shape = '';
+    for (let i = 0; i < this.matrix.length; i++) {
+      for (let j = 0; j < this.matrix[i].length; j++) {
+        shape += this.matrix[i][j];
+      }
+      shape += '\n';
+    }
+    return shape;
   }
 
   rotateRight(): RotatingShape {
