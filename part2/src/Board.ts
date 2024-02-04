@@ -62,9 +62,10 @@ export class Board {
 
   drawShape() {
     if (this.shape === undefined) return;
+    let matrixReference = this.shape instanceof RotatingShape ? this.shape.matrix : this.shape.orientations[this.shape.currentOrientation].matrix;
     for (let i = 0; i< this.shape.size; i++) {
       for (let j = 0; j < this.shape.size; j++) {
-        this.matrix[this.shapeRow + i][this.shapeColumn + j] = this.shape.matrix[i][j];
+        this.matrix[this.shapeRow + i][this.shapeColumn + j] = matrixReference[i][j];
       }
     }
   }
