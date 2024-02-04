@@ -29,8 +29,9 @@ export class Board {
   canFall() {
     if (this.shape === undefined) return false;
     const shapeOffset = this.shape instanceof RotatingShape ? 1 : 2;
-    if (this.shapeRow + this.shape?.size - shapeOffset === this.height - 1) return false;
-    const bottomShapeRow = this.shapeRow + this.shape.size;
+    if (this.shapeRow + this.shape.size - shapeOffset === this.height - 1) return false;
+    let bottomShapeRow = this.shapeRow + this.shape.size;
+    if (this.shape instanceof Tetromino) bottomShapeRow -= 1;
     if (bottomShapeRow >= this.height) return true;
     for (let i = this.shapeColumn; i < this.shapeColumn + this.shape.size; i++) {
       if (this.matrix[bottomShapeRow][i] !== '.') return false;
@@ -72,6 +73,7 @@ export class Board {
         ? this.shape.matrix
         : this.shape.orientations[this.shape.currentOrientation].matrix;
     for (let i = 0; i < this.shape.size; i++) {
+      if (this.shape instanceof Tetromino && i >= this.shape.size - 1) break;
       if (this.shapeRow + i >= this.height) break;
       for (let j = 0; j < this.shape.size; j++) {
         this.matrix[this.shapeRow + i][this.shapeColumn + j] = matrixReference[i][j];
