@@ -27,7 +27,13 @@ export class Board {
   }
 
   canFall() {
-    return this.shapeRow < this.height - 1 && this.matrix[this.shapeRow + 1][this.shapeColumn] === ".";
+    if (this.shape === undefined) return false;
+    if (this.shapeRow + this.shape?.size - 1 === this.height - 1) return false;
+    const bottomShapeRow = this.shapeRow + 1;
+    for (let i = this.shapeColumn; i < this.shapeColumn + this.shape.size; i++) {
+      if (this.matrix[bottomShapeRow][i] !== '.') return false;
+    }
+    return true;
   }
 
   drop(shape: string) {
