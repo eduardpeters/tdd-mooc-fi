@@ -25,7 +25,7 @@ export class RotatingShape {
   rotateRight(): RotatingShape {
     let rotated = "";
     for (let i = 0; i < this.matrix.length; i++) {
-      for (let j = this.matrix[i].length - 1; j >= 0; j--) {
+      for (let j = this.matrix.length - 1; j >= 0; j--) {
         rotated += this.matrix[j][i];
       }
       if (i !== this.matrix.length - 1) rotated += "\n";
@@ -34,11 +34,10 @@ export class RotatingShape {
   }
 
   rotateLeft(): RotatingShape {
-    const rows = this.shape.split("\n");
     let rotated = "";
-    for (let i = rows[0].length - 1; i >= 0; i--) {
-      for (let j = 0; j < rows.length; j++) {
-        rotated += rows[j][i];
+    for (let i = this.matrix.length - 1; i >= 0; i--) {
+      for (let j = 0; j < this.matrix.length; j++) {
+        rotated += this.matrix[j][i];
       }
       if (i !== 0) rotated += "\n";
     }
