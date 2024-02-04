@@ -23,13 +23,12 @@ export class RotatingShape {
   }
 
   rotateRight(): RotatingShape {
-    const rows = this.shape.split("\n");
     let rotated = "";
-    for (let i = 0; i < rows[0].length; i++) {
-      for (let j = rows.length - 1; j >= 0; j--) {
-        rotated += rows[j][i];
+    for (let i = 0; i < this.matrix.length; i++) {
+      for (let j = this.matrix[i].length - 1; j >= 0; j--) {
+        rotated += this.matrix[j][i];
       }
-      if (i !== rows[0].length - 1) rotated += "\n";
+      if (i !== this.matrix.length - 1) rotated += "\n";
     }
     return new RotatingShape(rotated);
   }
