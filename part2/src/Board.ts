@@ -28,8 +28,10 @@ export class Board {
 
   canFall() {
     if (this.shape === undefined) return false;
-    if (this.shapeRow + this.shape?.size - 1 === this.height - 1) return false;
-    const bottomShapeRow = this.shapeRow + 1;
+    const shapeOffset = this.shape instanceof RotatingShape ? 1 : 2;
+    if (this.shapeRow + this.shape?.size - shapeOffset === this.height - 1) return false;
+    const bottomShapeRow = this.shapeRow + this.shape.size;
+    if (bottomShapeRow >= this.height) return true;
     for (let i = this.shapeColumn; i < this.shapeColumn + this.shape.size; i++) {
       if (this.matrix[bottomShapeRow][i] !== '.') return false;
     }
@@ -70,6 +72,7 @@ export class Board {
         ? this.shape.matrix
         : this.shape.orientations[this.shape.currentOrientation].matrix;
     for (let i = 0; i < this.shape.size; i++) {
+      if (this.shapeRow + i >= this.height) break;
       for (let j = 0; j < this.shape.size; j++) {
         this.matrix[this.shapeRow + i][this.shapeColumn + j] = matrixReference[i][j];
       }
