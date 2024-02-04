@@ -23,10 +23,7 @@ export class Board {
   }
 
   hasFalling() {
-    if (this.shape !== undefined) {
-      return this.shape.size > 0;
-    }
-    return false;
+    return this.shape !== undefined;
   }
 
   canFall() {
