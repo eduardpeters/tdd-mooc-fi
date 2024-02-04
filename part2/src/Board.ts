@@ -24,7 +24,7 @@ export class Board {
 
   hasFalling() {
     if (this.shape !== undefined) {
-      return this.shape.shape.length > 0;
+      return this.shape.size > 0;
     }
     return false;
   }
@@ -47,7 +47,7 @@ export class Board {
     if (this.width % 2 === 0) {
       this.shapeColumn -= 1;
     }
-    this.matrix[this.shapeRow][this.shapeColumn] = this.shape.shape;
+    this.drawShape();
   }
 
   tick() {
@@ -64,7 +64,7 @@ export class Board {
     if (this.shape === undefined) return;
     for (let i = 0; i< this.shape.size; i++) {
       for (let j = 0; j < this.shape.size; j++) {
-        this.matrix[this.shapeRow + i][this.shapeColumn + j] = this.shape.toString();
+        this.matrix[this.shapeRow + i][this.shapeColumn + j] = this.shape.matrix[i][j];
       }
     }
   }
