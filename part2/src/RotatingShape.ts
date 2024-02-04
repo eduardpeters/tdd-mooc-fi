@@ -9,22 +9,22 @@ export class RotatingShape {
     const rows = shape.split("\n");
     for (let i = 0; i < rows.length; i++) {
       newMatrix.push([]);
-      const chars = rows[i].split('');
+      const chars = rows[i].split("");
       for (let j = 0; j < chars.length; j++) {
         newMatrix[i].push(chars[j]);
       }
-    } 
+    }
     this.matrix = newMatrix;
     this.size = newMatrix.length;
   }
 
   toString() {
-    let shape = '';
+    let shape = "";
     for (let i = 0; i < this.matrix.length; i++) {
       for (let j = 0; j < this.matrix[i].length; j++) {
         shape += this.matrix[i][j];
       }
-      shape += '\n';
+      shape += "\n";
     }
     return shape;
   }
