@@ -71,17 +71,17 @@ export class Board {
   }
 
   moveDown() {
-    this.clearShape();
-    this.shapeRow += 1;
-    this.drawShape();
-  }
-
-  tick() {
     if (this.hasFalling() && this.canFall()) {
-      this.moveDown();
+      this.clearShape();
+      this.shapeRow += 1;
+      this.drawShape();
     } else {
       this.shape = undefined;
     }
+  }
+
+  tick() {
+    this.moveDown();
   }
 
   drawShape() {
