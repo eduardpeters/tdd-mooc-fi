@@ -57,6 +57,7 @@ export class Board {
   }
 
   moveLeft() {
+    if (this.shapeColumn === 0) return;
     this.clearShape();
     this.shapeColumn -= 1;
     this.drawShape();
