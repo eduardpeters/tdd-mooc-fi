@@ -34,7 +34,7 @@ export class Board {
     if (this.shape instanceof Tetromino) bottomShapeRow -= 1;
     if (bottomShapeRow >= this.height) return true;
     for (let i = this.shapeColumn; i < this.shapeColumn + this.shape.size; i++) {
-      if (this.matrix[bottomShapeRow][i] !== '.') return false;
+      if (this.matrix[bottomShapeRow][i] !== ".") return false;
     }
     return true;
   }
@@ -68,11 +68,15 @@ export class Board {
     this.drawShape();
   }
 
+  moveDown() {
+    this.clearShape();
+    this.shapeRow += 1;
+    this.drawShape();
+  }
+
   tick() {
     if (this.hasFalling() && this.canFall()) {
-      this.clearShape();
-      this.shapeRow += 1;
-      this.drawShape();
+      this.moveDown();
     } else {
       this.shape = undefined;
     }
@@ -92,12 +96,12 @@ export class Board {
       }
     }
   }
-  
+
   clearShape() {
     if (this.shape === undefined) return;
     for (let i = 0; i < this.shape.size; i++) {
       for (let j = 0; j < this.shape.size; j++) {
-        this.matrix[this.shapeRow + i][this.shapeColumn + j] = '.';
+        this.matrix[this.shapeRow + i][this.shapeColumn + j] = ".";
       }
     }
   }
