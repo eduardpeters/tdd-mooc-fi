@@ -3,6 +3,24 @@ import { expect } from "chai";
 import { Board } from "../src/Board.ts";
 import { Tetromino } from "../src/Tetromino.ts";
 
+function moveToLeft(board) {
+  for (let i = 0; i < 10; i++) {
+    board.moveLeft();
+  }
+}
+
+function moveToRight(board) {
+  for (let i = 0; i < 10; i++) {
+    board.moveRight();
+  }
+}
+
+function moveToBottom(board) {
+  for (let i = 0; i < 10; i++) {
+    board.moveDown();
+  }
+}
+
 describe("Moving tetrominoes", () => {
   let board;
   beforeEach(() => {
@@ -53,9 +71,7 @@ describe("Moving tetrominoes", () => {
 
   test("it cannot be moved left beyond the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    for (let i = 0; i < 5; i++) {
-      board.moveLeft();
-    }
+    moveToLeft(board);
 
     expect(board.toString()).to.equalShape(
       `.T........
@@ -69,9 +85,7 @@ describe("Moving tetrominoes", () => {
 
   test("it cannot be moved right beyond the board", () => {
     board.drop(Tetromino.T_SHAPE);
-    for (let i = 0; i < 5; i++) {
-      board.moveRight();
-    }
+    moveToRight(board);
 
     expect(board.toString()).to.equalShape(
       `........T.
@@ -82,11 +96,10 @@ describe("Moving tetrominoes", () => {
        ..........`
     );
   });
+
   test("it cannot be moved down beyond the board (will stop falling)", () => {
     board.drop(Tetromino.T_SHAPE);
-    for (let i = 0; i < 5; i++) {
-      board.moveDown();
-    }
+    moveToBottom(board);
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -95,6 +108,26 @@ describe("Moving tetrominoes", () => {
        ..........
        ....T.....
        ...TTT....`
+    );
+  });
+
+  test("it cannot be moved left through other blocks", () => {
+    board.drop(Tetromino.O_SHAPE);
+    moveToBottom(board);
+    board.drop(Tetromino.T_SHAPE);
+    moveToRight(board);
+    for (let i = 0; i < 4; i++) {
+      board.moveDown();
+    }
+    moveToLeft(board);
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       .......T..
+       ....OOTTT.
+       ....OO....`
     );
   });
 });
