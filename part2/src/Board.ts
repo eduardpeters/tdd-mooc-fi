@@ -56,6 +56,12 @@ export class Board {
     this.drawShape();
   }
 
+  moveLeft() {
+    this.clearShape();
+    this.shapeColumn -= 1;
+    this.drawShape();
+  }
+
   tick() {
     if (this.hasFalling() && this.canFall()) {
       this.clearShape();
