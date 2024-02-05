@@ -64,6 +64,7 @@ export class Board {
   }
 
   moveRight() {
+    if (this.shape && this.shapeColumn + this.shape.size > this.width - 1) return;
     this.clearShape();
     this.shapeColumn += 1;
     this.drawShape();
