@@ -53,8 +53,10 @@ export class Board {
   canMoveRight() {
     if (this.shape === undefined) return false;
     if (this.shapeColumn + this.shape.size > this.width - 1) return false;
-    for (let i = 0; i < this.shape.size; i++) {
-      if (this.matrix[this.shapeRow + i][this.shapeColumn + this.shape.size] !== ".") return false;
+    let bottomShapeRow = this.shapeRow + this.shape.size;
+    if (this.shape instanceof Tetromino) bottomShapeRow -= 1;
+    for (let i = this.shapeRow; i < bottomShapeRow; i++) {
+      if (this.matrix[i][this.shapeColumn + this.shape.size] !== ".") return false;
     }
     return true;
   }
