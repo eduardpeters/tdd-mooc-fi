@@ -119,7 +119,6 @@ describe("Moving tetrominoes", () => {
     for (let i = 0; i < 3; i++) {
       board.moveDown();
     }
-    console.log(board.matrix);
     moveToLeft(board);
 
     expect(board.toString()).to.equalShape(
@@ -128,6 +127,26 @@ describe("Moving tetrominoes", () => {
        ..........
        .......T..
        ....OOTTT.
+       ....OO....`
+    );
+  });
+
+  test("it cannot be moved right through other blocks", () => {
+    board.drop(Tetromino.O_SHAPE);
+    moveToBottom(board);
+    board.drop(Tetromino.T_SHAPE);
+    moveToLeft(board);
+    for (let i = 0; i < 3; i++) {
+      board.moveDown();
+    }
+    moveToRight(board);
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..T.......
+       .TTTOO....
        ....OO....`
     );
   });
