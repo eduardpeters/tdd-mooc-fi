@@ -116,7 +116,7 @@ describe("Moving tetrominoes", () => {
     moveToBottom(board);
     board.drop(Tetromino.T_SHAPE);
     moveToRight(board);
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       board.moveDown();
     }
     moveToLeft(board);
@@ -125,9 +125,9 @@ describe("Moving tetrominoes", () => {
       `..........
        ..........
        ..........
-       .......T..
-       ....OOTTT.
-       ....OO....`
+       ..........
+       ....OO.T..
+       ....OOTTT.`
     );
   });
 
