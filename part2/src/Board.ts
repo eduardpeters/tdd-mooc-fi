@@ -48,6 +48,15 @@ export class Board {
     return true;
   }
 
+  canMoveRight() {
+    if (this.shape === undefined) return false;
+    if (this.shapeColumn + this.shape.size > this.width - 1) return false;
+    for (let i = 0; i < this.shape.size; i++) {
+      if (this.matrix[this.shapeRow + i][this.shapeColumn + this.shape.size] !== ".") return false;
+    }
+    return true;
+  }
+
   drop(shape: string) {
     if (this.hasFalling()) {
       throw new Error("already falling");
@@ -74,10 +83,11 @@ export class Board {
   }
 
   moveRight() {
-    if (this.shape && this.shapeColumn + this.shape.size > this.width - 1) return;
-    this.clearShape();
-    this.shapeColumn += 1;
-    this.drawShape();
+    if (this.canMoveRight()) {
+      this.clearShape();
+      this.shapeColumn += 1;
+      this.drawShape();
+    }
   }
 
   moveDown() {
