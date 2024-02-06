@@ -42,6 +42,9 @@ export class Board {
   canMoveLeft() {
     if (this.shape === undefined) return false;
     if (this.shapeColumn === 0) return false;
+    for (let i = 0; i < this.shape.size; i++) {
+      if (this.matrix[this.shapeRow + i][this.shapeColumn - 1] !== ".") return false;
+    }
     return true;
   }
 

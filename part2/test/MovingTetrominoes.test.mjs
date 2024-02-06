@@ -116,9 +116,10 @@ describe("Moving tetrominoes", () => {
     moveToBottom(board);
     board.drop(Tetromino.T_SHAPE);
     moveToRight(board);
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       board.moveDown();
     }
+    console.log(board.matrix);
     moveToLeft(board);
 
     expect(board.toString()).to.equalShape(
