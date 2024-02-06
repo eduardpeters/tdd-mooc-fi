@@ -39,6 +39,12 @@ export class Board {
     return true;
   }
 
+  canMoveLeft() {
+    if (this.shape === undefined) return false;
+    if (this.shapeColumn === 0) return false;
+    return true;
+  }
+
   drop(shape: string) {
     if (this.hasFalling()) {
       throw new Error("already falling");
@@ -57,10 +63,11 @@ export class Board {
   }
 
   moveLeft() {
-    if (this.shapeColumn === 0) return;
-    this.clearShape();
-    this.shapeColumn -= 1;
-    this.drawShape();
+    if (this.canMoveLeft()) {
+      this.clearShape();
+      this.shapeColumn -= 1;
+      this.drawShape();
+    }
   }
 
   moveRight() {
