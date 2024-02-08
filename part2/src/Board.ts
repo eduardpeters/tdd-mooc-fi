@@ -61,6 +61,11 @@ export class Board {
     return true;
   }
 
+  canRotateLeft() {
+    if (this.shape === undefined) return false;
+    return true;
+  }
+
   drop(shape: string) {
     if (this.hasFalling()) {
       throw new Error("already falling");
@@ -105,7 +110,7 @@ export class Board {
   }
 
   rotateLeft() {
-    if (this.hasFalling()) {
+    if (this.canRotateLeft()) {
       if (this.shape instanceof Tetromino) {
         this.clearShape();
         const rotated = this.shape.rotateLeft();
