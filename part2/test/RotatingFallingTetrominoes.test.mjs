@@ -16,7 +16,7 @@ function moveToRight(board) {
 }
 
 function moveToBottom(board) {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 4; i++) {
     board.moveDown();
   }
 }
@@ -52,6 +52,21 @@ describe("Rotaring falling tetrominoes", () => {
        ..........
        ..........
        ..........`
+    );
+  });
+
+  test("a falling tetromino cannot be rotated left if there is no room", () => {
+    board.drop(Tetromino.T_SHAPE);
+    moveToBottom(board);
+    board.rotateLeft();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ....T.....
+       ...TTT....`
     );
   });
 });
