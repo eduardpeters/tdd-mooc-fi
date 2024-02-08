@@ -104,6 +104,17 @@ export class Board {
     }
   }
 
+  rotateLeft() {
+    if (this.hasFalling()) {
+      if (this.shape instanceof Tetromino) {
+        this.clearShape();
+        const rotated = this.shape.rotateLeft();
+        this.shape = rotated.orientations[rotated.currentOrientation];
+        this.drawShape();
+      }
+    }
+  }
+
   tick() {
     this.moveDown();
   }
