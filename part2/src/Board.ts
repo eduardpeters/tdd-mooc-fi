@@ -162,9 +162,7 @@ export class Board {
     if (this.canRotateLeft()) {
       if (this.shape instanceof Tetromino) {
         this.clearShape();
-        console.log(this.shape.toString());
         this.shape = this.shape.rotateLeft();
-        console.log(this.shape.toString());
         this.drawShape();
       }
     }
@@ -174,8 +172,7 @@ export class Board {
     if (this.canRotateRight()) {
       if (this.shape instanceof Tetromino) {
         this.clearShape();
-        const rotated = this.shape.rotateRight();
-        this.shape = rotated.orientations[rotated.currentOrientation];
+        this.shape = this.shape.rotateRight();
         this.drawShape();
       }
     }
@@ -192,10 +189,10 @@ export class Board {
         ? this.shape.matrix
         : this.shape.orientations[this.shape.currentOrientation].matrix;
     for (let i = 0; i < this.shape.size; i++) {
-      //if (this.shape instanceof Tetromino && i >= this.shape.size - 1) break;
-      //if (this.shapeRow + i >= this.height) break;
       for (let j = 0; j < this.shape.size; j++) {
-        if (matrixReference[i][j] !== ".") this.matrix[this.shapeRow + i][this.shapeColumn + j] = matrixReference[i][j];
+        if (matrixReference[i][j] !== ".") {
+          this.matrix[this.shapeRow + i][this.shapeColumn + j] = matrixReference[i][j];
+        }
       }
     }
   }
