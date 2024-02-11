@@ -65,15 +65,7 @@ export class Board {
     if (this.shape === undefined) return false;
     if (this.shape instanceof Tetromino) {
       const rotated = this.shape.rotateLeft();
-      for (let i = 0; i < rotated.size; i++) {
-        for (let j = 0; j < rotated.size; j++) {
-          if (rotated.orientations[rotated.currentOrientation].matrix[i][j] === ".") continue;
-          if (this.shapeRow + i >= this.height || this.shapeColumn + j >= this.width) return false;
-          if (this.matrix[this.shapeRow + i][this.shapeColumn + j] !== ".") {
-            if (!this.isSameShapeCollision(i, j)) return false;
-          }
-        }
-      }
+      return !this.shapeCollides(rotated);
     }
     return true;
   }
@@ -82,15 +74,7 @@ export class Board {
     if (this.shape === undefined) return false;
     if (this.shape instanceof Tetromino) {
       const rotated = this.shape.rotateRight();
-      for (let i = 0; i < rotated.size; i++) {
-        for (let j = 0; j < rotated.size; j++) {
-          if (rotated.orientations[rotated.currentOrientation].matrix[i][j] === ".") continue;
-          if (this.shapeRow + i >= this.height || this.shapeColumn + j >= this.width) return false;
-          if (this.matrix[this.shapeRow + i][this.shapeColumn + j] !== ".") {
-            if (!this.isSameShapeCollision(i, j)) return false;
-          }
-        }
-      }
+      return !this.shapeCollides(rotated);
     }
     return true;
   }
