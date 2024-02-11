@@ -95,6 +95,19 @@ export class Board {
     return true;
   }
 
+  shapeCollides(rotated: Tetromino) {
+    for (let i = 0; i < rotated.size; i++) {
+      for (let j = 0; j < rotated.size; j++) {
+        if (rotated.orientations[rotated.currentOrientation].matrix[i][j] === ".") continue;
+        if (this.shapeRow + i >= this.height || this.shapeColumn + j >= this.width) return true;
+        if (this.matrix[this.shapeRow + i][this.shapeColumn + j] !== ".") {
+          if (!this.isSameShapeCollision(i, j)) return true;
+        }
+      }
+    }
+    return false;
+  }
+
   isSameShapeCollision(rowOffset: number, columnOffset: number) {
     if (this.shape instanceof Tetromino) {
       return this.shape.orientations[this.shape.currentOrientation].matrix[rowOffset][columnOffset] !== ".";
