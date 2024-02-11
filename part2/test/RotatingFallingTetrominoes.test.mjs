@@ -84,4 +84,20 @@ describe("Rotaring falling tetrominoes", () => {
        ...TTT....`
     );
   });
+
+  test("Wall kick when rotating without room in right wall", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateLeft();
+    moveToRight(board);
+    board.rotateRight();
+
+    expect(board.toString()).to.equalShape(
+      `........T.
+       .......TTT
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
 });
