@@ -52,13 +52,29 @@ export class Board {
 
   canMoveRight() {
     if (this.shape === undefined) return false;
-    if (this.shapeColumn + this.shape.size > this.width - 1) return false;
+    const rightmostColumn = this.getRightmostColumn();
+    if (this.shapeColumn + rightmostColumn + 1 > this.width) return false;
     let bottomShapeRow = this.shapeRow + this.shape.size;
     if (this.shape instanceof Tetromino) bottomShapeRow -= 1;
     for (let i = this.shapeRow; i < bottomShapeRow; i++) {
-      if (this.matrix[i][this.shapeColumn + this.shape.size] !== ".") return false;
+      if (this.matrix[i][this.shapeColumn + rightmostColumn + 1] !== ".") return false;
     }
     return true;
+  }
+
+  getRightmostColumn() {
+    if (this.shape === undefined) return 0;
+    let rightmostColumn = this.shape.size - 1;
+    if (this.shape instanceof Tetromino) {
+      for (rightmostColumn; rightmostColumn >= 0; rightmostColumn--) {
+        for (let j = 0; j < this.shape.size; j++) {
+          if (this.shape.orientations[this.shape.currentOrientation].matrix[j][rightmostColumn] !== ".") {
+            return rightmostColumn;
+          }
+        }
+      }
+    }
+    return rightmostColumn;
   }
 
   canRotateLeft() {
