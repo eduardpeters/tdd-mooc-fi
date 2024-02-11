@@ -63,6 +63,17 @@ export class Board {
 
   canRotateLeft() {
     if (this.shape === undefined) return false;
+    if (this.shape instanceof Tetromino) {
+      const rotated = this.shape.rotateLeft();
+      this.clearShape();
+      for (let i = 0; i < rotated.size; i++) {
+        for (let j = 0; j < rotated.size; j++) {
+          if (rotated.orientations[rotated.currentOrientation].matrix[i][j] === ".") continue;
+          if (this.shapeRow + i >= this.height || this.shapeColumn + j >= this.width) return false;
+          if (this.matrix[this.shapeRow + i][this.shapeColumn + j] !== ".") return false;
+        }
+      }
+    }
     return true;
   }
 
@@ -115,9 +126,9 @@ export class Board {
         this.clearShape();
         const rotated = this.shape.rotateLeft();
         this.shape = rotated.orientations[rotated.currentOrientation];
-        this.drawShape();
       }
     }
+    this.drawShape();
   }
 
   rotateRight() {
