@@ -100,4 +100,20 @@ describe("Rotaring falling tetrominoes", () => {
        ..........`
     );
   });
+
+  test("Wall kick when rotating without room in left wall", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateRight();
+    moveToLeft(board);
+    board.rotateLeft();
+
+    expect(board.toString()).to.equalShape(
+      `.T........
+       TTT.......
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
 });
