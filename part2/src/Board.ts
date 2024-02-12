@@ -169,11 +169,18 @@ export class Board {
   }
 
   rotateRight() {
-    if (this.canRotateRight()) {
-      if (this.shape instanceof Tetromino) {
+    if (this.shape instanceof Tetromino) {
+      if (this.canRotateRight()) {
         this.clearShape();
         this.shape = this.shape.rotateRight();
         this.drawShape();
+      } else if (this.canMoveLeft()) {
+        this.moveLeft();
+        if (this.canRotateRight()) {
+          this.rotateRight();
+        } else {
+          this.moveRight();
+        }
       }
     }
   }
