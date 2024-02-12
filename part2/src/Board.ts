@@ -41,11 +41,12 @@ export class Board {
 
   canMoveLeft() {
     if (this.shape === undefined) return false;
-    if (this.shapeColumn === 0) return false;
+    const leftmostColumn = this.getLeftmostColumn();
+    if (this.shapeColumn + leftmostColumn - 1 < 0) return false;
     let bottomShapeRow = this.shapeRow + this.shape.size;
     if (this.shape instanceof Tetromino) bottomShapeRow -= 1;
     for (let i = this.shapeRow; i < bottomShapeRow; i++) {
-      if (this.matrix[i][this.shapeColumn - 1] !== ".") return false;
+      if (this.matrix[i][this.shapeColumn + leftmostColumn - 1] !== ".") return false;
     }
     return true;
   }
@@ -60,6 +61,21 @@ export class Board {
       if (this.matrix[i][this.shapeColumn + rightmostColumn + 1] !== ".") return false;
     }
     return true;
+  }
+
+  getLeftmostColumn() {
+    if (this.shape === undefined) return 0;
+    let leftmostColumn = 0;
+    if (this.shape instanceof Tetromino) {
+      for (leftmostColumn; leftmostColumn < this.shape.size; leftmostColumn++) {
+        for (let j = 0; j < this.shape.size; j++) {
+          if (this.shape.orientations[this.shape.currentOrientation].matrix[j][leftmostColumn] !== ".") {
+            return leftmostColumn;
+          }
+        }
+      }
+    }
+    return leftmostColumn;
   }
 
   getRightmostColumn() {
