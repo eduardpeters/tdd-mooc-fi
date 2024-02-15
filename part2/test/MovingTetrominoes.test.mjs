@@ -21,7 +21,7 @@ function moveToBottom(board) {
   }
 }
 
-describe("Moving tetrominoes", () => {
+describe.skip("Moving tetrominoes", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);

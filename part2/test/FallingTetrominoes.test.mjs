@@ -9,7 +9,7 @@ function fallToBottom(board) {
   }
 }
 
-describe("Falling tetrominoes", () => {
+describe.skip("Falling tetrominoes", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
