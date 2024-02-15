@@ -18,6 +18,12 @@ export class Tetromino {
     new RotatingShape("....\n..L.\nLLL.\n...."),
     new RotatingShape(".L..\n.L..\n.LL.\n...."),
   ]);
+  static J_SHAPE = new Tetromino([
+    new RotatingShape("....\nJJJ.\n..J.\n...."),
+    new RotatingShape(".J..\n.J..\nJJ..\n...."),
+    new RotatingShape("....\nJ...\nJJJ.\n...."),
+    new RotatingShape(".JJ.\n.J..\n.J..\n...."),
+  ]);
   static I_SHAPE = new Tetromino([
     new RotatingShape("....\nIIII\n....\n...."),
     new RotatingShape("..I.\n..I.\n..I.\n..I."),
