@@ -229,7 +229,13 @@ export class Board {
     for (let i = 0; i < this.shape.size; i++) {
       if (this.shapeRow + i === this.height) break;
       for (let j = 0; j < this.shape.size; j++) {
-        if (this.shapeColumn + j === this.width) break;
+        if (
+          this.shapeRow + i < 0 ||
+          this.shapeRow + i >= this.height ||
+          this.shapeColumn + j < 0 ||
+          this.shapeColumn + j >= this.width
+        )
+          break;
         this.matrix[this.shapeRow + i][this.shapeColumn + j] = ".";
       }
     }
