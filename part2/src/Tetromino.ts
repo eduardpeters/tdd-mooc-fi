@@ -10,7 +10,7 @@ export class Tetromino {
     new RotatingShape("....\nIIII\n....\n...."),
     new RotatingShape("..I.\n..I.\n..I.\n..I."),
   ]);
-  static O_SHAPE = new Tetromino(`.OO\n.OO\n...`, 1);
+  static O_SHAPE = new Tetromino(`.OO\n.OO\n...`, 1, [new RotatingShape("....\n.OO.\n.OO.\n....")]);
 
   constructor(shape: string, orientationCount: number, orientations: RotatingShape[] = [], currentOrientation = 0) {
     this.orientations = orientations;
