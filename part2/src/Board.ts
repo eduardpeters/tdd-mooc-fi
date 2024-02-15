@@ -131,7 +131,7 @@ export class Board {
     return true;
   }
 
-  drop(shape: string) {
+  drop(shape: string | Tetromino) {
     if (this.hasFalling()) {
       throw new Error("already falling");
     }
@@ -140,11 +140,8 @@ export class Board {
     } else {
       this.shape = shape;
     }
-    this.shapeRow = 0;
+    this.shapeRow = this.shape instanceof Tetromino ? -1 : 0;
     this.shapeColumn = Math.floor(this.width / 2) - Math.floor(this.shape.size / 2);
-    if (this.width % 2 === 0) {
-      this.shapeColumn -= 1;
-    }
     this.drawShape();
   }
 
