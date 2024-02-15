@@ -5,7 +5,13 @@ export class Tetromino {
   orientations: RotatingShape[];
   currentOrientation: number;
 
-  static T_SHAPE = new Tetromino(`.T.\nTTT\n...`, 4);
+  // Arika Rotation System hard coding
+  static T_SHAPE = new Tetromino(`.T.\nTTT\n...`, 4, [
+    new RotatingShape("....\nTTT.\n.T..\n...."),
+    new RotatingShape(".T..\nTT..\n.T..\n...."),
+    new RotatingShape("....\n.T..\nTTT.\n...."),
+    new RotatingShape(".T..\n.TT.\n.T..\n...."),
+  ]);
   static I_SHAPE = new Tetromino(`.....\n.....\nIIII.\n.....\n.....`, 2, [
     new RotatingShape("....\nIIII\n....\n...."),
     new RotatingShape("..I.\n..I.\n..I.\n..I."),
