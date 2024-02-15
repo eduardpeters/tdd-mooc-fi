@@ -32,6 +32,10 @@ export class Tetromino {
     new RotatingShape("....\n.SS.\nSS..\n...."),
     new RotatingShape("S...\nSS..\n.S..\n...."),
   ]);
+  static Z_SHAPE = new Tetromino([
+    new RotatingShape("....\nZZ..\n.ZZ.\n...."),
+    new RotatingShape("..Z.\n.ZZ.\n.Z..\n...."),
+  ]);
   static O_SHAPE = new Tetromino([new RotatingShape("....\n.OO.\n.OO.\n....")]);
 
   constructor(orientations: RotatingShape[], currentOrientation = 0) {
