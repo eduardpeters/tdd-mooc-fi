@@ -46,6 +46,7 @@ export class Board {
     let bottomShapeRow = this.shapeRow + this.shape.size;
     if (this.shape instanceof Tetromino) bottomShapeRow -= 1;
     for (let i = this.shapeRow; i < bottomShapeRow; i++) {
+      if (i < 0) continue;
       if (this.matrix[i][this.shapeColumn + leftmostColumn - 1] !== ".") return false;
     }
     return true;
