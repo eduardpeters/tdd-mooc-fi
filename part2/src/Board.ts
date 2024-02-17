@@ -43,8 +43,7 @@ export class Board {
     if (this.shape === undefined) return false;
     const leftmostColumn = this.getLeftmostColumn();
     if (this.shapeColumn + leftmostColumn - 1 < 0) return false;
-    let bottomShapeRow = this.shapeRow + this.shape.size;
-    if (this.shape instanceof Tetromino) bottomShapeRow -= 1;
+    const bottomShapeRow = this.getBottomRow();
     for (let i = this.shapeRow; i < bottomShapeRow; i++) {
       if (i < 0) continue;
       if (this.matrix[i][this.shapeColumn + leftmostColumn - 1] !== ".") return false;
@@ -56,8 +55,7 @@ export class Board {
     if (this.shape === undefined) return false;
     const rightmostColumn = this.getRightmostColumn();
     if (this.shapeColumn + rightmostColumn + 1 > this.width) return false;
-    let bottomShapeRow = this.shapeRow + this.shape.size;
-    if (this.shape instanceof Tetromino) bottomShapeRow -= 1;
+    const bottomShapeRow = this.getBottomRow();
     for (let i = this.shapeRow; i < bottomShapeRow; i++) {
       if (this.matrix[i][this.shapeColumn + rightmostColumn + 1] !== ".") return false;
     }
@@ -92,6 +90,21 @@ export class Board {
       }
     }
     return rightmostColumn;
+  }
+
+  getBottomRow() {
+    if (this.shape === undefined) return 0;
+    let bottomShapeRow = this.shapeRow + this.shape.size;
+    if (this.shape instanceof Tetromino) {
+      for (bottomShapeRow; bottomShapeRow >= 0; bottomShapeRow--) {
+        for (let j = 0; j < this.shape.size; j++) {
+          if (this.shape.orientations[this.shape.currentOrientation].matrix[bottomShapeRow][j] !== ".") {
+            return bottomShapeRow;
+          }
+        }
+      }
+    }
+    return bottomShapeRow;
   }
 
   canRotateLeft() {
