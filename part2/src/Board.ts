@@ -28,13 +28,11 @@ export class Board {
 
   canFall() {
     if (this.shape === undefined) return false;
-    const shapeOffset = this.shape instanceof RotatingShape ? 1 : 2;
-    if (this.shapeRow + this.shape.size - shapeOffset === this.height - 1) return false;
-    let bottomShapeRow = this.shapeRow + this.shape.size;
-    if (this.shape instanceof Tetromino) bottomShapeRow -= 1;
+    let bottomShapeRow = this.shapeRow + this.getBottomRow();
+    if (bottomShapeRow + 1 === this.height) return false;
     if (bottomShapeRow >= this.height) return true;
     for (let i = this.shapeColumn; i < this.shapeColumn + this.shape.size; i++) {
-      if (this.matrix[bottomShapeRow][i] !== ".") return false;
+      if (this.matrix[bottomShapeRow + 1][i] !== ".") return false;
     }
     return true;
   }
@@ -94,7 +92,7 @@ export class Board {
 
   getBottomRow() {
     if (this.shape === undefined) return 0;
-    let bottomShapeRow = this.shapeRow + this.shape.size;
+    let bottomShapeRow = this.shape.size - 1;
     if (this.shape instanceof Tetromino) {
       for (bottomShapeRow; bottomShapeRow >= 0; bottomShapeRow--) {
         for (let j = 0; j < this.shape.size; j++) {
