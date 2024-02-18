@@ -55,6 +55,7 @@ export class Board {
     if (this.shapeColumn + rightmostColumn + 1 > this.width) return false;
     const bottomShapeRow = this.getBottomRow();
     for (let i = this.shapeRow; i < bottomShapeRow; i++) {
+      if (i < 0) continue;
       if (this.matrix[i][this.shapeColumn + rightmostColumn + 1] !== ".") return false;
     }
     return true;
@@ -127,7 +128,13 @@ export class Board {
     for (let i = 0; i < rotated.size; i++) {
       for (let j = 0; j < rotated.size; j++) {
         if (rotated.orientations[rotated.currentOrientation].matrix[i][j] === ".") continue;
-        if (this.shapeRow + i >= this.height || this.shapeColumn + j >= this.width) return true;
+        if (
+          this.shapeRow + i < 0 ||
+          this.shapeRow + i >= this.height ||
+          this.shapeColumn + j < 0 ||
+          this.shapeColumn + j >= this.width
+        )
+          return true;
         if (this.matrix[this.shapeRow + i][this.shapeColumn + j] !== ".") {
           if (!this.isSameShapeCollision(i, j)) return true;
         }

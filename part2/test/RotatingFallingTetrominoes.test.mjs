@@ -21,7 +21,7 @@ function moveToBottom(board) {
   }
 }
 
-describe("Rotaring falling tetrominoes", () => {
+describe("Rotating falling tetrominoes", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
@@ -87,15 +87,15 @@ describe("Rotaring falling tetrominoes", () => {
     );
   });
 
-  test.skip("Wall kick when rotating without room in right wall", () => {
+  test("Wall kick when rotating without room in right wall", () => {
     board.drop(Tetromino.T_SHAPE);
-    board.rotateLeft();
-    moveToRight(board);
     board.rotateRight();
+    moveToRight(board);
+    board.rotateLeft();
 
     expect(board.toString()).to.equalShape(
-      `........T.
-       .......TTT
+      `.......TTT
+       ........T.
        ..........
        ..........
        ..........
