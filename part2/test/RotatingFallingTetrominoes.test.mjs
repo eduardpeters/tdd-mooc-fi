@@ -16,12 +16,12 @@ function moveToRight(board) {
 }
 
 function moveToBottom(board) {
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 5; i++) {
     board.moveDown();
   }
 }
 
-describe.skip("Rotaring falling tetrominoes", () => {
+describe("Rotaring falling tetrominoes", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6);
@@ -29,21 +29,8 @@ describe.skip("Rotaring falling tetrominoes", () => {
 
   test("a falling tetromino can be rotated left", () => {
     board.drop(Tetromino.T_SHAPE);
+    board.moveDown();
     board.rotateLeft();
-
-    expect(board.toString()).to.equalShape(
-      `....T.....
-       ...TT.....
-       ....T.....
-       ..........
-       ..........
-       ..........`
-    );
-  });
-
-  test.skip("a falling tetromino can be rotated right", () => {
-    board.drop(Tetromino.T_SHAPE);
-    board.rotateRight();
 
     expect(board.toString()).to.equalShape(
       `....T.....
@@ -55,8 +42,23 @@ describe.skip("Rotaring falling tetrominoes", () => {
     );
   });
 
-  test.skip("a falling tetromino cannot be rotated left if there is no room", () => {
+  test("a falling tetromino can be rotated right", () => {
     board.drop(Tetromino.T_SHAPE);
+    board.moveDown();
+    board.rotateRight();
+
+    expect(board.toString()).to.equalShape(
+      `....T.....
+       ...TT.....
+       ....T.....
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
+  test("a falling tetromino cannot be rotated left if there is no room", () => {
+    board.drop(Tetromino.I_SHAPE);
     moveToBottom(board);
     board.rotateLeft();
 
@@ -65,13 +67,13 @@ describe.skip("Rotaring falling tetrominoes", () => {
        ..........
        ..........
        ..........
-       ....T.....
-       ...TTT....`
+       ..........
+       ...IIII...`
     );
   });
 
-  test.skip("a falling tetromino cannot be rotated right if there is no room", () => {
-    board.drop(Tetromino.T_SHAPE);
+  test("a falling tetromino cannot be rotated right if there is no room", () => {
+    board.drop(Tetromino.I_SHAPE);
     moveToBottom(board);
     board.rotateRight();
 
@@ -80,8 +82,8 @@ describe.skip("Rotaring falling tetrominoes", () => {
        ..........
        ..........
        ..........
-       ....T.....
-       ...TTT....`
+       ..........
+       ...IIII...`
     );
   });
 
