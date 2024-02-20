@@ -28,8 +28,12 @@ describe("Line clears", () => {
   });
 
   test.skip("A filled line at bottom is cleared", () => {
-    board.drop(Tetromino.T_SHAPE);
-    board.moveLeft();
+    board.drop(Tetromino.I_SHAPE);
+    moveToLeft(board);
+    moveToBottom(board);
+    board.drop(Tetromino.I_SHAPE);
+    moveToRight(board);
+    moveToBottom(board);
 
     expect(board.toString()).to.equalShape(
       `..TTT.....

@@ -97,6 +97,20 @@ describe("Moving tetrominoes", () => {
     );
   });
 
+  test("I shape cannot be moved right beyond the board", () => {
+    board.drop(Tetromino.I_SHAPE);
+    moveToRight(board);
+
+    expect(board.toString()).to.equalShape(
+      `......IIII
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
+
   test("it cannot be moved down beyond the board (will stop falling)", () => {
     board.drop(Tetromino.T_SHAPE);
     moveToBottom(board);
