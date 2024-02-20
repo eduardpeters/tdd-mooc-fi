@@ -53,7 +53,7 @@ export class Board {
     if (this.shape === undefined) return false;
     const rightmostColumn = this.getRightmostColumn();
     if (this.shapeColumn + rightmostColumn + 1 > this.width) return false;
-    const bottomShapeRow = this.getBottomRow();
+    const bottomShapeRow = this.shapeRow + this.getBottomRow();
     for (let i = this.shapeRow; i < bottomShapeRow; i++) {
       if (i < 0) continue;
       if (this.matrix[i][this.shapeColumn + rightmostColumn + 1] !== ".") return false;

@@ -131,7 +131,7 @@ describe("Moving tetrominoes", () => {
     );
   });
 
-  test.skip("it cannot be moved right through other blocks", () => {
+  test("it cannot be moved right through other blocks", () => {
     board.drop(Tetromino.O_SHAPE);
     moveToBottom(board);
     board.drop(Tetromino.T_SHAPE);
