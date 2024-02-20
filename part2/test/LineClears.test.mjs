@@ -27,21 +27,23 @@ describe("Line clears", () => {
     board = new Board(10, 6);
   });
 
-  test.skip("A filled line at bottom is cleared", () => {
+  test("A filled line at bottom is cleared", () => {
     board.drop(Tetromino.I_SHAPE);
     moveToLeft(board);
     moveToBottom(board);
     board.drop(Tetromino.I_SHAPE);
     moveToRight(board);
     moveToBottom(board);
+    board.drop(Tetromino.O_SHAPE);
+    moveToBottom(board);
 
     expect(board.toString()).to.equalShape(
-      `..TTT.....
-       ...T......
+      `..........
        ..........
        ..........
        ..........
-       ..........`
+       ....OO....
+       IIIIOOIIII`
     );
   });
 });

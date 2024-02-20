@@ -28,9 +28,11 @@ export class Board {
 
   canFall() {
     if (this.shape === undefined) return false;
-    let bottomShapeRow = this.shapeRow + this.getBottomRow();
+    const startShapeColumn = this.shapeColumn + this.getLeftmostColumn();
+    const finalShapeColumn = this.shapeColumn + this.getRightmostColumn();
+    const bottomShapeRow = this.shapeRow + this.getBottomRow();
     if (bottomShapeRow + 1 === this.height) return false;
-    for (let i = this.shapeColumn; i < this.shapeColumn + this.shape.size; i++) {
+    for (let i = startShapeColumn; i <= finalShapeColumn; i++) {
       if (i >= this.width) continue;
       if (this.matrix[bottomShapeRow + 1][i] !== ".") return false;
     }
@@ -245,6 +247,10 @@ export class Board {
 
   clearShape() {
     if (this.shape === undefined) return;
+    let matrixReference =
+      this.shape instanceof RotatingShape
+        ? this.shape.matrix
+        : this.shape.orientations[this.shape.currentOrientation].matrix;
     for (let i = 0; i < this.shape.size; i++) {
       if (this.shapeRow + i === this.height) break;
       for (let j = 0; j < this.shape.size; j++) {
@@ -255,7 +261,9 @@ export class Board {
           this.shapeColumn + j >= this.width
         )
           break;
-        this.matrix[this.shapeRow + i][this.shapeColumn + j] = ".";
+        if (matrixReference[i][j] !== ".") {
+          this.matrix[this.shapeRow + i][this.shapeColumn + j] = ".";
+        }
       }
     }
   }
