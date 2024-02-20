@@ -111,14 +111,16 @@ describe("Moving tetrominoes", () => {
     );
   });
 
-  test.skip("it cannot be moved left through other blocks", () => {
+  test("it cannot be moved left through other blocks", () => {
     board.drop(Tetromino.O_SHAPE);
     moveToBottom(board);
     board.drop(Tetromino.T_SHAPE);
     moveToRight(board);
+    console.log(board.shape);
     for (let i = 0; i < 4; i++) {
       board.moveDown();
     }
+    console.log(board.toString());
     moveToLeft(board);
 
     expect(board.toString()).to.equalShape(

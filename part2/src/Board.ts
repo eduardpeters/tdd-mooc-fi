@@ -30,8 +30,8 @@ export class Board {
     if (this.shape === undefined) return false;
     let bottomShapeRow = this.shapeRow + this.getBottomRow();
     if (bottomShapeRow + 1 === this.height) return false;
-    if (bottomShapeRow >= this.height) return true;
     for (let i = this.shapeColumn; i < this.shapeColumn + this.shape.size; i++) {
+      if (i >= this.width) continue;
       if (this.matrix[bottomShapeRow + 1][i] !== ".") return false;
     }
     return true;
