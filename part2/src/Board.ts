@@ -189,6 +189,7 @@ export class Board {
       this.drawShape();
     } else {
       this.shape = undefined;
+      this.clearLines();
     }
   }
 
@@ -228,6 +229,18 @@ export class Board {
 
   tick() {
     this.moveDown();
+  }
+
+  clearLines() {
+    if (this.shape === undefined) {
+      for (let i = 0; i < this.width; i++) {
+        if (this.matrix[this.height - 1][i] === ".") return;
+      }
+      for (let i = 0; i < this.width; i++) {
+        this.matrix[this.height - 1][i] = this.matrix[this.height - 2][i];
+        this.matrix[this.height - 2][i] = ".";
+      }
+    }
   }
 
   drawShape() {
