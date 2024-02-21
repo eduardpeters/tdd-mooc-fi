@@ -74,4 +74,32 @@ describe("Line clears", () => {
        OO..OO..OO`
     );
   });
+
+  test("Two filled lines at bottom are cleared", () => {
+    board.drop(Tetromino.I_SHAPE);
+    moveToLeft(board);
+    moveToBottom(board);
+    board.drop(Tetromino.I_SHAPE);
+    moveToRight(board);
+    moveToBottom(board);
+    board.drop(Tetromino.I_SHAPE);
+    moveToLeft(board);
+    moveToBottom(board);
+    board.drop(Tetromino.I_SHAPE);
+    moveToRight(board);
+    moveToBottom(board);
+    board.drop(Tetromino.O_SHAPE);
+    for (let i = 0; i < 5; i++) {
+      board.moveDown();
+    }
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
 });
