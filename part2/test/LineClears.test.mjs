@@ -46,4 +46,29 @@ describe("Line clears", () => {
        ....OO....`
     );
   });
+
+  test("A filled line not at bottom is cleared", () => {
+    board.drop(Tetromino.O_SHAPE);
+    moveToLeft(board);
+    moveToBottom(board);
+    /*
+    board.drop(Tetromino.O_SHAPE);
+    moveToBottom(board);
+    board.drop(Tetromino.O_SHAPE);
+    moveToRight(board);
+    moveToBottom(board);
+    board.drop(Tetromino.I_SHAPE);
+    moveToLeft(board);
+    moveToBottom(board);
+    */
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ....OO....`
+    );
+  });
 });

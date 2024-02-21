@@ -273,7 +273,7 @@ export class Board {
           this.shapeColumn + j < 0 ||
           this.shapeColumn + j >= this.width
         )
-          break;
+          continue;
         if (matrixReference[i][j] !== ".") {
           this.matrix[this.shapeRow + i][this.shapeColumn + j] = ".";
         }
