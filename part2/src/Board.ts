@@ -242,8 +242,8 @@ export class Board {
       }
       if (rowToClear > 0) {
         for (let i = 0; i < this.width; i++) {
-          this.matrix[this.height - 1][i] = this.matrix[this.height - 2][i];
-          this.matrix[this.height - 2][i] = ".";
+          this.matrix[rowToClear][i] = this.matrix[rowToClear - 1][i];
+          this.matrix[rowToClear - 1][i] = ".";
         }
       }
     }
