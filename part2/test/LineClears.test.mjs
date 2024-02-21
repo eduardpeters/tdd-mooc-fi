@@ -51,7 +51,8 @@ describe("Line clears", () => {
     board.drop(Tetromino.O_SHAPE);
     moveToLeft(board);
     moveToBottom(board);
-    /*
+    board.drop(Tetromino.O_SHAPE);
+    moveToBottom(board);
     board.drop(Tetromino.O_SHAPE);
     moveToBottom(board);
     board.drop(Tetromino.O_SHAPE);
@@ -60,15 +61,17 @@ describe("Line clears", () => {
     board.drop(Tetromino.I_SHAPE);
     moveToLeft(board);
     moveToBottom(board);
-    */
+    board.drop(Tetromino.I_SHAPE);
+    moveToRight(board);
+    moveToBottom(board);
 
     expect(board.toString()).to.equalShape(
       `..........
        ..........
        ..........
-       ..........
-       ..........
-       ....OO....`
+       ....OO....
+       OO..OO..OO
+       OO..OO..OO`
     );
   });
 });
