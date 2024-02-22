@@ -1,4 +1,5 @@
 import { beforeEach, describe, test, expect } from "vitest";
+import ScoreSystem from "../src/ScoreSystem";
 
 describe("Score notifications", () => {
   let score;
