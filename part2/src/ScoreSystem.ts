@@ -6,6 +6,15 @@ export default class ScoreSystem {
   }
 
   linesCleared(count: number) {
-    this.value += 40 * count;
+    switch (count) {
+      case 1:
+        this.value += 40;
+        break;
+      case 2:
+        this.value += 100;
+        break;
+      default:
+        break;
+    }
   }
 }

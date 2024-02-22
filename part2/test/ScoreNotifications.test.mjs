@@ -15,4 +15,9 @@ describe("Score notifications", () => {
     score.linesCleared(1);
     expect(score.value).to.equal(40);
   });
+
+  test("Updates the score when notified of two lines cleared", () => {
+    score.linesCleared(2);
+    expect(score.value).to.equal(100);
+  });
 });
