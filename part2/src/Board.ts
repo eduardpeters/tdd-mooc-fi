@@ -233,17 +233,17 @@ export class Board {
 
   clearLines() {
     if (this.shape === undefined) {
-      let rowToClear = -1;
+      let rowsToClear = [];
       for (let i = 0; i < this.height; i++) {
         if (this.matrix[i].every((value) => value !== ".")) {
-          rowToClear = i;
+          rowsToClear.push(i);
           break;
         }
       }
-      if (rowToClear > 0) {
+      if (rowsToClear.length > 0) {
         for (let i = 0; i < this.width; i++) {
-          this.matrix[rowToClear][i] = this.matrix[rowToClear - 1][i];
-          this.matrix[rowToClear - 1][i] = ".";
+          this.matrix[rowsToClear[0]][i] = this.matrix[rowsToClear[0] - 1][i];
+          this.matrix[rowsToClear[0] - 1][i] = ".";
         }
       }
     }
