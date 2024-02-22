@@ -237,14 +237,11 @@ export class Board {
       for (let i = 0; i < this.height; i++) {
         if (this.matrix[i].every((value) => value !== ".")) {
           rowsToClear.push(i);
-          break;
         }
       }
-      if (rowsToClear.length > 0) {
-        for (let i = 0; i < this.width; i++) {
-          this.matrix[rowsToClear[0]][i] = this.matrix[rowsToClear[0] - 1][i];
-          this.matrix[rowsToClear[0] - 1][i] = ".";
-        }
+      for (let i = 0; i < rowsToClear.length; i++) {
+        this.matrix.splice(rowsToClear[i], 1);
+        this.matrix.unshift(Array(this.width).fill("."));
       }
     }
   }
