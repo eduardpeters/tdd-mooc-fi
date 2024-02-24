@@ -5,6 +5,10 @@ export default class ScoreSystem {
     this.value = 0;
   }
 
+  update(data: { linesCleared: number }) {
+    this.linesCleared(data.linesCleared);
+  }
+
   linesCleared(count: number) {
     switch (count) {
       case 1:

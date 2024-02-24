@@ -12,22 +12,22 @@ describe("Score notifications", () => {
   });
 
   test("Updates the score when notified of a line cleared", () => {
-    score.linesCleared(1);
+    score.update({ linesCleared: 1 });
     expect(score.value).to.equal(40);
   });
 
   test("Updates the score when notified of two lines cleared", () => {
-    score.linesCleared(2);
+    score.update({ linesCleared: 2 });
     expect(score.value).to.equal(100);
   });
 
   test("Updates the score when notified of three lines cleared", () => {
-    score.linesCleared(3);
+    score.update({ linesCleared: 3 });
     expect(score.value).to.equal(300);
   });
 
   test("Updates the score when notified of four lines cleared", () => {
-    score.linesCleared(4);
+    score.update({ linesCleared: 4 });
     expect(score.value).to.equal(1000);
   });
 });
