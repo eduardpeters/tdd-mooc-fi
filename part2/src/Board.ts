@@ -10,6 +10,7 @@ export class Board {
   shapeRow = 0;
   shapeColumn = 0;
   score: ScoreSystem | undefined;
+  softDrops = 0;
 
   constructor(width: number, height: number, scoreInstance: ScoreSystem) {
     this.width = width;
@@ -166,6 +167,7 @@ export class Board {
     }
     this.shapeRow = this.shape instanceof Tetromino ? -1 : 0;
     this.shapeColumn = Math.floor(this.width / 2) - Math.floor(this.shape.size / 2);
+    this.softDrops = 0;
     this.drawShape();
   }
 
@@ -190,6 +192,7 @@ export class Board {
       this.clearShape();
       this.shapeRow += 1;
       this.drawShape();
+      this.softDrops += 1;
     } else {
       this.shape = undefined;
       this.clearLines();
@@ -232,6 +235,7 @@ export class Board {
 
   tick() {
     this.moveDown();
+    this.softDrops = 0;
   }
 
   clearLines() {
@@ -246,8 +250,8 @@ export class Board {
         this.matrix.splice(rowsToClear[i], 1);
         this.matrix.unshift(Array(this.width).fill("."));
       }
-      if (this.score !== undefined) {
-        this.score.update({ linesCleared: rowsToClear.length });
+      if (rowsToClear.length > 0 && this.score !== undefined) {
+        this.score.update({ linesCleared: rowsToClear.length, softDrops: this.softDrops });
       }
     }
   }

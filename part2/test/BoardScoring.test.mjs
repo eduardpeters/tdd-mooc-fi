@@ -25,13 +25,13 @@ function moveToBottom(board, useTick = false) {
   }
 }
 
-describe("Line clears", () => {
+describe("Board scoring", () => {
   let board;
   beforeEach(() => {
     board = new Board(10, 6, new ScoreSystem());
   });
 
-  test("A filled line at bottom is cleared", () => {
+  test("A single line cleared updates the score", () => {
     board.drop(Tetromino.I_SHAPE);
     moveToLeft(board);
     moveToBottom(board);
@@ -42,5 +42,18 @@ describe("Line clears", () => {
     moveToBottom(board, true);
 
     expect(board.score.value).to.equal(40);
+  });
+
+  test("A single line cleared with soft drops updates the score", () => {
+    board.drop(Tetromino.I_SHAPE);
+    moveToLeft(board);
+    moveToBottom(board);
+    board.drop(Tetromino.I_SHAPE);
+    moveToRight(board);
+    moveToBottom(board);
+    board.drop(Tetromino.O_SHAPE);
+    moveToBottom(board);
+
+    expect(board.score.value).to.equal(44);
   });
 });
