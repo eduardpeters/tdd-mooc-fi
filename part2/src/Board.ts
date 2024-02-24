@@ -1,4 +1,5 @@
 import { RotatingShape } from "./RotatingShape";
+import ScoreSystem from "./ScoreSystem";
 import { Tetromino } from "./Tetromino";
 
 export class Board {
@@ -8,8 +9,9 @@ export class Board {
   shape: Tetromino | RotatingShape | undefined;
   shapeRow = 0;
   shapeColumn = 0;
+  score: ScoreSystem | undefined;
 
-  constructor(width: number, height: number) {
+  constructor(width: number, height: number, scoreInstance: ScoreSystem) {
     this.width = width;
     this.height = height;
     this.matrix = [];
@@ -20,6 +22,7 @@ export class Board {
       }
       this.matrix.push(row);
     }
+    this.score = scoreInstance;
   }
 
   hasFalling() {
