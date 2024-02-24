@@ -30,4 +30,14 @@ describe("Score notifications", () => {
     score.update({ linesCleared: 4 });
     expect(score.value).to.equal(1000);
   });
+
+  test("Updates the score when notified of a line cleared plus soft drops", () => {
+    score.update({ linesCleared: 1, softDrops: 1 });
+    expect(score.value).to.equal(41);
+  });
+
+  test("Updates the score when notified of three lines cleared plus 5 softdrops", () => {
+    score.update({ linesCleared: 3, softDrops: 5 });
+    expect(score.value).to.equal(305);
+  });
 });

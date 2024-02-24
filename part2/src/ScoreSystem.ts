@@ -5,8 +5,11 @@ export default class ScoreSystem {
     this.value = 0;
   }
 
-  update(data: { linesCleared: number }) {
+  update(data: { linesCleared: number; softDrops?: number }) {
     this.linesCleared(data.linesCleared);
+    if (data.softDrops) {
+      this.value += data.softDrops;
+    }
   }
 
   linesCleared(count: number) {
