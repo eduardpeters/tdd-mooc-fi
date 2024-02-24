@@ -15,9 +15,13 @@ function moveToRight(board) {
   }
 }
 
-function moveToBottom(board) {
+function moveToBottom(board, useTick = false) {
   for (let i = 0; i < 10; i++) {
-    board.moveDown();
+    if (useTick) {
+      board.tick();
+    } else {
+      board.moveDown();
+    }
   }
 }
 
@@ -35,15 +39,8 @@ describe("Line clears", () => {
     moveToRight(board);
     moveToBottom(board);
     board.drop(Tetromino.O_SHAPE);
-    moveToBottom(board);
+    moveToBottom(board, true);
 
-    expect(board.toString()).to.equalShape(
-      `..........
-       ..........
-       ..........
-       ..........
-       ..........
-       ....OO....`
-    );
+    expect(board.score.value).to.equal(40);
   });
 });

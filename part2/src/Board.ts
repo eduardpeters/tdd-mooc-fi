@@ -246,6 +246,9 @@ export class Board {
         this.matrix.splice(rowsToClear[i], 1);
         this.matrix.unshift(Array(this.width).fill("."));
       }
+      if (this.score !== undefined) {
+        this.score.update({ linesCleared: rowsToClear.length });
+      }
     }
   }
 
