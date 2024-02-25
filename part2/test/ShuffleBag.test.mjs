@@ -21,6 +21,14 @@ describe("Shuffle bag with numbers", () => {
     outputs.sort((a, b) => a - b);
     expect(outputs).toEqual(values);
   });
+
+  test("Next item after full run is repeated from previous run", () => {
+    let outputs = [];
+    for (let i = 0; i < values.length; i++) {
+      outputs.push(bag.next());
+    }
+    expect(outputs.includes(bag.next())).toBe(true);
+  });
 });
 
 describe("Shuffle bag with numbers", () => {
@@ -48,5 +56,13 @@ describe("Shuffle bag with numbers", () => {
       outputs.push(bag.next());
     }
     expect(outputs.sort()).toEqual(values.sort());
+  });
+
+  test("Next item after full run is repeated from previous run", () => {
+    let outputs = [];
+    for (let i = 0; i < values.length; i++) {
+      outputs.push(bag.next());
+    }
+    expect(outputs.includes(bag.next())).toBe(true);
   });
 });
