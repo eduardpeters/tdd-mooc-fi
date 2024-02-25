@@ -18,6 +18,7 @@ describe("Shuffle bag with numbers", () => {
     for (let i = 0; i < values.length; i++) {
       outputs.push(bag.next());
     }
+    expect(outputs).not.toEqual(values);
     outputs.sort((a, b) => a - b);
     expect(outputs).toEqual(values);
   });
@@ -55,6 +56,7 @@ describe("Shuffle bag with numbers", () => {
     for (let i = 0; i < values.length; i++) {
       outputs.push(bag.next());
     }
+    expect(outputs).not.toEqual(values);
     expect(outputs.sort()).toEqual(values.sort());
   });
 
