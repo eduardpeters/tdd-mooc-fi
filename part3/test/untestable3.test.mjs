@@ -24,7 +24,16 @@ describe("Untestable 3: CSV file parsing", () => {
       let person = parsePeopleCsv("Yor,Forger,27,Female")[0];
       expect(person.age).to.equal(27);
       person = parsePeopleCsv("Yor,Forger,,Female")[0];
-      expect(person.age).to.be.undefined;
+      expect(person.age, "age is optional").to.be.undefined;
+    });
+
+    test("Parses gender", () => {
+      let person = parsePeopleCsv("a,b,3,Female")[0];
+      expect(person.gender).to.equal("f");
+      person = parsePeopleCsv("a,b,3,Male")[0];
+      expect(person.gender).to.equal("m");
+      person = parsePeopleCsv("a,b,3,female")[0];
+      expect(person.gender, "gender is case-insensitive").to.equal("f");
     });
   });
 });
