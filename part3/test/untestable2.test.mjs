@@ -3,8 +3,8 @@ import { expect } from "chai";
 import { diceHandValue } from "../src/untestable2.mjs";
 
 describe("Untestable 2: a dice game", () => {
-  test("todo", () => {
+  test("One Pair", () => {
     // TODO: write proper tests
-    expect(diceHandValue()).to.be.a("number");
+    expect(diceHandValue(3, 3)).to.equal(103);
   });
 });
