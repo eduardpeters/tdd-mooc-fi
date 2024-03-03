@@ -19,5 +19,12 @@ describe("Untestable 3: CSV file parsing", () => {
       expect(person.firstName).to.equal("Yor");
       expect(person.lastName).to.equal("Forger");
     });
+
+    test("Parses age", () => {
+      let person = parsePeopleCsv("Yor,Forger,27,Female")[0];
+      expect(person.age).to.equal(27);
+      person = parsePeopleCsv("Yor,Forger,,Female")[0];
+      expect(person.age).to.be.undefined;
+    });
   });
 });
