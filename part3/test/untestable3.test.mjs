@@ -48,5 +48,11 @@ describe("Untestable 3: CSV file parsing", () => {
         { firstName: "D", lastName: "E", age: 6, gender: "f" },
       ]);
     });
+
+    test("Trims whitespace", () => {
+      const input = "  Anya , Forger ,  6     , Female  ";
+      const person = parsePeopleCsv(input);
+      expect(person).to.deep.equal([{ firstName: "Anya", lastName: "Forger", age: 6, gender: "f" }]);
+    });
   });
 });
