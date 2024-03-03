@@ -35,5 +35,18 @@ describe("Untestable 3: CSV file parsing", () => {
       person = parsePeopleCsv("a,b,3,female")[0];
       expect(person.gender, "gender is case-insensitive").to.equal("f");
     });
+
+    test("Skips empty lines", () => {
+      const input = `
+      A,B,3,male
+
+      D,E,6,Female
+      `;
+      const persons = parsePeopleCsv(input);
+      expect(persons).to.deep.equal([
+        { firstName: "A", lastName: "B", age: 3, gender: "m" },
+        { firstName: "D", lastName: "E", age: 6, gender: "f" },
+      ]);
+    });
   });
 });
