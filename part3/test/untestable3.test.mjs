@@ -12,4 +12,12 @@ describe("Untestable 3: CSV file parsing", () => {
     const content = await readUtf8File("./test/dummy.txt");
     expect(content).to.equal("for testing purposes\n");
   });
+
+  describe("CSV Parsing", () => {
+    test("Parses name", () => {
+      const person = parsePeopleCsv("Yor,Forger,27,Female")[0];
+      expect(person.firstName).to.equal("Yor");
+      expect(person.lastName).to.equal("Forger");
+    });
+  });
 });
