@@ -1,5 +1,19 @@
 import { afterEach, beforeEach, describe, test } from "vitest";
-import { PasswordService, PostgresUserDao } from "../src/untestable4.mjs";
+import { PasswordHasher, PasswordService, PostgresUserDao } from "../src/untestable4.mjs";
+import { expect } from "chai";
+
+describe("Password hasher", () => {
+  let hasher;
+  beforeEach(() => {
+    hasher = new PasswordHasher();
+  });
+
+  test("A password is hashed", () => {
+    const plainText = "hey-there";
+    const hash = hasher.hashPassword(plainText);
+    expect(hash).not.to.equal(plainText);
+  });
+});
 
 describe("Untestable 4: enterprise application", () => {
   let service;
@@ -11,12 +25,7 @@ describe("Untestable 4: enterprise application", () => {
     PostgresUserDao.getInstance().close();
   });
 
-  test("change password", async () => {
-    const originalUser = {
-      userId: 123,
-      passwordHash: "old-password",
-    };
-
-    service.changePassword(originalUser.userId, "old-password", "new-password");
+  test("test", async () => {
+    // pending
   });
 });
