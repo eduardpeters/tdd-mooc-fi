@@ -11,7 +11,12 @@ describe("Untestable 4: enterprise application", () => {
     PostgresUserDao.getInstance().close();
   });
 
-  test("todo", async () => {
-    // TODO: write proper tests for both PasswordService and PostgresUserDao
+  test("change password", async () => {
+    const originalUser = {
+      userId: 123,
+      passwordHash: "old-password",
+    };
+
+    service.changePassword(originalUser.userId, "old-password", "new-password");
   });
 });
