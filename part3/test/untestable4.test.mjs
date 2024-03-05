@@ -27,9 +27,14 @@ describe("Password hasher", () => {
   });
 });
 
-describe("Untestable 4: enterprise application", () => {
+describe("Password hasher", () => {
+  const userId = 123;
+  let users;
+  let hasher;
   let service;
   beforeEach(() => {
+    users = new PostgresUserDao();
+    hasher = new PasswordHasher();
     service = new PasswordService();
   });
 
@@ -37,7 +42,19 @@ describe("Untestable 4: enterprise application", () => {
     PostgresUserDao.getInstance().close();
   });
 
-  test("test", async () => {
-    // pending
+  test("Password can be changed", async () => {
+    const originalUser = {
+      userId,
+      passwordHash: hasher.hashPassword("old-password"),
+    };
+
+    await users.save(originalUser);
+
+    await service.changePassword(userId, "old-password", "new-password");
+
+    const newUser = await users.getById(userId);
+
+    expect(newUser.passwordHash).to.not.equal(originalUser.passwordHash);
+    expect(hasher.verifyPassword(newUser.passwordHash, "new-password")).to.be.true;
   });
 });
