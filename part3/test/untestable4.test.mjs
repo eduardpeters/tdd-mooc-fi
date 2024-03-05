@@ -13,6 +13,12 @@ describe("Password hasher", () => {
     const hash = hasher.hashPassword(plainText);
     expect(hash).not.to.equal(plainText);
   });
+
+  test("A hash is verified", () => {
+    const plainText = "hey-there";
+    const hash = hasher.hashPassword(plainText);
+    expect(hasher.verifyPassword(hash, plainText)).to.be.true;
+  });
 });
 
 describe("Untestable 4: enterprise application", () => {
