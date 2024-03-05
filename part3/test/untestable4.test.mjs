@@ -14,10 +14,16 @@ describe("Password hasher", () => {
     expect(hash).not.to.equal(plainText);
   });
 
-  test("A hash is verified", () => {
+  test("A valid hash is verified", () => {
     const plainText = "hey-there";
     const hash = hasher.hashPassword(plainText);
     expect(hasher.verifyPassword(hash, plainText)).to.be.true;
+  });
+
+  test("An incorrect hash is rejected", () => {
+    const plainText = "hey-there";
+    const hash = hasher.hashPassword(plainText);
+    expect(hasher.verifyPassword(hash, "hello-there")).to.be.false;
   });
 });
 
