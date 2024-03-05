@@ -61,6 +61,16 @@ export class PasswordService {
   }
 }
 
+export class PasswordHasher {
+  hashPassword(password) {
+    return argon2.hashSync(password);
+  }
+
+  verifyPassword(hash, password) {
+    return argon2.verifySync(hash, password);
+  }
+}
+
 /*
 export class PostgresUserDao {
   static instance;
