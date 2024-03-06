@@ -27,7 +27,7 @@ describe("Password hasher", () => {
   });
 });
 
-describe("Password hasher", () => {
+describe("Users DAO", () => {
   const userId = 123;
   let users;
   let hasher;
@@ -74,5 +74,27 @@ describe("Password hasher", () => {
     }
 
     expect(error).to.deep.equal(new Error("wrong old password"));
+  });
+
+  test("Get user by id", async () => {
+    const firstUser = {
+      userId: 123,
+      passwordHash: "abc",
+    };
+    const secondUser = {
+      userId: 456,
+      passwordHash: "def",
+    };
+
+    await users.save(firstUser);
+    await users.save(secondUser);
+
+    const firstUserStored = await users.getById(123);
+    const secondUserStored = await users.getById(456);
+
+    expect(firstUserStored).to.deep.equal(firstUser);
+    expect(secondUserStored).to.deep.equal(secondUser);
+    expect(firstUserStored).to.not.equal(firstUser, "Differente reference");
+    expect(await users.getById(999)).to.equal(null);
   });
 });
