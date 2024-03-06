@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, test } from "vitest";
+import { afterAll, afterEach, beforeEach, describe, test } from "vitest";
 import { PasswordHasher, PasswordService, PostgresUserDao } from "../src/untestable4.mjs";
 import { expect } from "chai";
 
@@ -38,7 +38,7 @@ describe("Password hasher", () => {
     service = new PasswordService();
   });
 
-  afterEach(() => {
+  afterAll(() => {
     PostgresUserDao.getInstance().close();
   });
 
@@ -56,5 +56,23 @@ describe("Password hasher", () => {
 
     expect(newUser.passwordHash).to.not.equal(originalUser.passwordHash);
     expect(hasher.verifyPassword(newUser.passwordHash, "new-password")).to.be.true;
+  });
+
+  test("Wrong password is rejected", async () => {
+    const originalUser = {
+      userId,
+      passwordHash: hasher.hashPassword("old-password"),
+    };
+
+    await users.save(originalUser);
+
+    let error;
+    try {
+      await service.changePassword(userId, "wrong-password", "new-password");
+    } catch (e) {
+      error = e;
+    }
+
+    expect(error).to.deep.equal(new Error("wrong old password"));
   });
 });
