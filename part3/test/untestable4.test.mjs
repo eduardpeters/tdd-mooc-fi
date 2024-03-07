@@ -1,4 +1,4 @@
-import { afterAll, afterEach, beforeEach, describe, test } from "vitest";
+import { afterAll, afterEach, beforeAll, beforeEach, describe, test } from "vitest";
 import { PasswordHasher, PasswordService, PostgresUserDao } from "../src/untestable4.mjs";
 import { expect } from "chai";
 
@@ -27,19 +27,37 @@ describe("Password hasher", () => {
   });
 });
 
+async function connectDb() {
+  return new pg.Pool({
+    user: process.env.VITE_PGUSER,
+    host: process.env.VITE_PGHOST,
+    database: process.env.VITE_PGDATABASE,
+    password: process.env.VITE_PGPASSWORD,
+    port: process.env.VITE_PGPORT,
+  });
+}
+
+async function truncateTables(db) {
+  db.query("truncate users");
+}
+
 describe("Users DAO", () => {
   const userId = 123;
+  let db;
   let users;
   let hasher;
   let service;
-  beforeEach(() => {
-    users = new PostgresUserDao();
+
+  beforeAll(async () => {
+    db = await connectDb();
+    await truncateTables(db);
+    users = new PostgresUserDao(db);
     hasher = new PasswordHasher();
     service = new PasswordService();
   });
 
-  afterAll(() => {
-    PostgresUserDao.getInstance().close();
+  afterAll(async () => {
+    await db.end();
   });
 
   test("Password can be changed", async () => {
