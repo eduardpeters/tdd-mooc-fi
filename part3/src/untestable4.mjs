@@ -1,26 +1,8 @@
 import argon2 from "@node-rs/argon2";
-import pg from "pg";
 
 export class PostgresUserDao {
-  static instance;
-
-  static getInstance() {
-    if (!this.instance) {
-      this.instance = new PostgresUserDao();
-    }
-    return this.instance;
-  }
-
-  db = new pg.Pool({
-    user: process.env.VITE_PGUSER,
-    host: process.env.VITE_PGHOST,
-    database: process.env.VITE_PGDATABASE,
-    password: process.env.VITE_PGPASSWORD,
-    port: process.env.VITE_PGPORT,
-  });
-
-  close() {
-    this.db.end();
+  constructor(db) {
+    this.db = db;
   }
 
   #rowToUser(row) {
@@ -49,8 +31,10 @@ export class PostgresUserDao {
 }
 
 export class PasswordService {
-  users = PostgresUserDao.getInstance();
-  hasher = new PasswordHasher();
+  constructor(users, hasher) {
+    this.users = users;
+    this.hasher = hasher;
+  }
 
   async changePassword(userId, oldPassword, newPassword) {
     const user = await this.users.getById(userId);

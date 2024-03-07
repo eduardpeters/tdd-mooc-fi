@@ -1,6 +1,7 @@
 import { afterAll, afterEach, beforeAll, beforeEach, describe, test } from "vitest";
 import { PasswordHasher, PasswordService, PostgresUserDao } from "../src/untestable4.mjs";
 import { expect } from "chai";
+import pg from "pg";
 
 describe("Password hasher", () => {
   let hasher;
@@ -53,7 +54,7 @@ describe("Users DAO", () => {
     await truncateTables(db);
     users = new PostgresUserDao(db);
     hasher = new PasswordHasher();
-    service = new PasswordService();
+    service = new PasswordService(users, hasher);
   });
 
   afterAll(async () => {
