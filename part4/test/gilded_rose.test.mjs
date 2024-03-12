@@ -24,6 +24,20 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(100);
     expect(items[0].quality).to.equal(80);
   });
+
+  test("Backstage passes have different quality increases", () => {
+    const gildedRose = new Shop([
+      provideBackstagePass(11, 10),
+      provideBackstagePass(10, 10),
+      provideBackstagePass(5, 10),
+      provideBackstagePass(0, 10),
+    ]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).to.equal(11);
+    expect(items[1].quality).to.equal(12);
+    expect(items[2].quality).to.equal(13);
+    expect(items[3].quality).to.equal(0);
+  });
 });
 
 function provideAgedBrie(sellIn = 10, quality = 25) {
