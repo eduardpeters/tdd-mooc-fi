@@ -4,18 +4,22 @@ import { Item, Shop } from "../src/gilded_rose.mjs";
 
 describe("Gilded Rose", () => {
   test("Shop update quality method", () => {
-    const gildedRose = new Shop([new Item("foo", 0, 0)]);
+    const gildedRose = new Shop([new Item("foo", 0, 0), new Item("bar", -1, 10)]);
     const items = gildedRose.updateQuality();
     expect(items[0].name).to.equal("foo");
     expect(items[0].sellIn).to.equal(-1);
     expect(items[0].quality).to.equal(0);
+    expect(items[1].name).to.equal("bar");
+    expect(items[1].sellIn).to.equal(-2);
+    expect(items[1].quality).to.equal(8);
   });
 
   test("Aged Brie increases in quality within limits", () => {
-    const gildedRose = new Shop([provideAgedBrie(5, 10), provideAgedBrie(1, 50)]);
+    const gildedRose = new Shop([provideAgedBrie(5, 10), provideAgedBrie(1, 50), provideAgedBrie(0, 25)]);
     const items = gildedRose.updateQuality();
     expect(items[0].quality).to.equal(11);
     expect(items[1].quality).to.equal(50);
+    expect(items[2].quality).to.equal(27);
   });
 
   test("Sulfuras does not change sellIn or quality", () => {
