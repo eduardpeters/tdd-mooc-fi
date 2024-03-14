@@ -64,6 +64,18 @@ describe("Aged Brie", () => {
     agedBrie.updateQuality();
     expect(agedBrie.quality).to.equal(11);
   });
+
+  test("Aged Brie increases in quality within limits", () => {
+    const agedBrie = new AgedBrie(5, 50);
+    agedBrie.updateQuality();
+    expect(agedBrie.quality).to.equal(50);
+  });
+
+  test("Aged Brie increases in quality twice as fast after sell in", () => {
+    const agedBrie = new AgedBrie(0, 10);
+    agedBrie.updateQuality();
+    expect(agedBrie.quality).to.equal(12);
+  });
 });
 
 function provideAgedBrie(sellIn = 10, quality = 25) {
