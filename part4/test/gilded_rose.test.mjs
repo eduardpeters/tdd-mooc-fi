@@ -1,6 +1,6 @@
 import { describe, test } from "vitest";
 import { expect } from "chai";
-import { Item, Shop } from "../src/gilded_rose.mjs";
+import { Item, Shop, AgedBrie } from "../src/gilded_rose.mjs";
 
 describe("Gilded Rose", () => {
   test("Shop update quality method", () => {
@@ -55,6 +55,14 @@ describe("Gilded Rose", () => {
     expect(items[1].quality).to.equal(50);
     expect(items[2].quality).to.equal(50);
     expect(items[3].quality).to.equal(0);
+  });
+});
+
+describe("Aged Brie", () => {
+  test("Aged Brie increases in quality", () => {
+    const agedBrie = new AgedBrie(5, 10);
+    agedBrie.updateQuality();
+    expect(agedBrie.quality).to.equal(11);
   });
 });
 
