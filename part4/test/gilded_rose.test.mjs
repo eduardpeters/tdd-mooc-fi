@@ -94,10 +94,16 @@ describe("Backstage passes", () => {
     expect(backstagePass.quality).to.equal(11);
   });
 
-  test.skip("Aged Brie increases in quality within limits", () => {
-    const agedBrie = new AgedBrie(5, 50);
-    agedBrie.updateQuality();
-    expect(agedBrie.quality).to.equal(50);
+  test("Backstage passes increase in quality at double rate at 10 days from sell in date", () => {
+    const backstagePass1 = new BackstagePass(10, 10);
+    const backstagePass2 = new BackstagePass(8, 10);
+    const backstagePass3 = new BackstagePass(8, 50);
+    backstagePass1.updateQuality();
+    backstagePass2.updateQuality();
+    backstagePass3.updateQuality();
+    expect(backstagePass1.quality).to.equal(12);
+    expect(backstagePass2.quality).to.equal(12);
+    expect(backstagePass3.quality).to.equal(50);
   });
 
   test.skip("Aged Brie increases in quality twice as fast after sell in", () => {
