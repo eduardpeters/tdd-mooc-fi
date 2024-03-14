@@ -117,6 +117,12 @@ describe("Backstage passes", () => {
     expect(backstagePass2.quality).to.equal(13);
     expect(backstagePass3.quality).to.equal(50);
   });
+
+  test("Backstage passes drop to 0 quality after sell in date", () => {
+    const backstagePass = new BackstagePass(0, 50);
+    backstagePass.updateQuality();
+    expect(backstagePass.quality).to.equal(0);
+  });
 });
 
 function provideAgedBrie(sellIn = 10, quality = 25) {
