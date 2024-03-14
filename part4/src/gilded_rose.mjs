@@ -43,6 +43,9 @@ export class BackstagePass extends Item {
     if (this.quality < 50 && this.sellIn < 10) {
       this.quality += 1;
     }
+    if (this.quality < 50 && this.sellIn < 6) {
+      this.quality += 1;
+    }
   }
 }
 
