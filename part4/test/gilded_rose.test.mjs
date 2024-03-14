@@ -78,6 +78,15 @@ describe("Aged Brie", () => {
   });
 });
 
+describe("Sulfuras, Hand of Ragnaros", () => {
+  test("Sulfuras has no changes with update", () => {
+    const sulfuras = new Sulfuras(5, 80);
+    sulfuras.updateQuality();
+    expect(sulfuras.sellIn).to.equal(5);
+    expect(sulfuras.quality).to.equal(80);
+  });
+});
+
 function provideAgedBrie(sellIn = 10, quality = 25) {
   return new Item("Aged Brie", sellIn, quality);
 }
