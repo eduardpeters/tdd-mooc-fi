@@ -22,6 +22,14 @@ export class AgedBrie extends Item {
   }
 }
 
+export class Sulfuras extends Item {
+  constructor(sellIn, quality = 80) {
+    super("Sulfuras, Hand of Ragnaros", sellIn, quality);
+  }
+
+  updateQuality() {}
+}
+
 export class Shop {
   constructor(items = []) {
     this.items = items;
