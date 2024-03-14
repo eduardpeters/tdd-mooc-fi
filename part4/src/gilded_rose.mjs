@@ -30,6 +30,19 @@ export class Sulfuras extends Item {
   updateQuality() {}
 }
 
+export class BackstagePass extends Item {
+  constructor(sellIn, quality) {
+    super("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
+  }
+
+  updateQuality() {
+    this.sellIn -= 1;
+    if (this.quality < 50) {
+      this.quality += 1;
+    }
+  }
+}
+
 export class Shop {
   constructor(items = []) {
     this.items = items;

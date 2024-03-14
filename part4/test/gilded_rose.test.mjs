@@ -1,6 +1,6 @@
 import { describe, test } from "vitest";
 import { expect } from "chai";
-import { Item, Shop, AgedBrie, Sulfuras } from "../src/gilded_rose.mjs";
+import { Item, Shop, AgedBrie, Sulfuras, BackstagePass } from "../src/gilded_rose.mjs";
 
 describe("Gilded Rose", () => {
   test("Shop update quality method", () => {
@@ -84,6 +84,26 @@ describe("Sulfuras, Hand of Ragnaros", () => {
     sulfuras.updateQuality();
     expect(sulfuras.sellIn).to.equal(5);
     expect(sulfuras.quality).to.equal(80);
+  });
+});
+
+describe("Backstage passes", () => {
+  test("Backstage passes increase in quality at normal rate", () => {
+    const backstagePass = new BackstagePass(15, 10);
+    backstagePass.updateQuality();
+    expect(backstagePass.quality).to.equal(11);
+  });
+
+  test.skip("Aged Brie increases in quality within limits", () => {
+    const agedBrie = new AgedBrie(5, 50);
+    agedBrie.updateQuality();
+    expect(agedBrie.quality).to.equal(50);
+  });
+
+  test.skip("Aged Brie increases in quality twice as fast after sell in", () => {
+    const agedBrie = new AgedBrie(0, 10);
+    agedBrie.updateQuality();
+    expect(agedBrie.quality).to.equal(12);
   });
 });
 
