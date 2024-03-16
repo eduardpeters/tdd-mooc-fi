@@ -67,6 +67,14 @@ describe("Item quality behaviour", () => {
     expect(fooItem.quality).to.equal(9);
   });
 
+  test("Items past sellIn data decrease in quality twice as fast", () => {
+    const fooItem = new GenericItem("foo", 0, 10);
+    fooItem.updateQuality();
+    expect(fooItem.name).to.equal("foo");
+    expect(fooItem.sellIn).to.equal(-1);
+    expect(fooItem.quality).to.equal(8);
+  });
+
   test("Items do not decrease in quality below 0", () => {
     const fooItem = new GenericItem("foo", 5, 0);
     const barItem = new GenericItem("bar", 0, 0);
