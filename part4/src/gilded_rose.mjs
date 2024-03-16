@@ -1,4 +1,8 @@
-export class Item {
+export const AGED_BRIE_NAME = "Aged Brie";
+export const SULFURAS_NAME = "Sulfuras, Hand of Ragnaros";
+export const BACKSTAGE_NAME = "Backstage passes to a TAFKAL80ETC concert";
+
+class Item {
   constructor(name, sellIn, quality) {
     this.name = name;
     this.sellIn = sellIn;
@@ -23,7 +27,7 @@ export class GenericItem extends Item {
 
 export class AgedBrie extends Item {
   constructor(sellIn, quality) {
-    super("Aged Brie", sellIn, quality);
+    super(AGED_BRIE_NAME, sellIn, quality);
   }
 
   updateQuality() {
@@ -39,7 +43,7 @@ export class AgedBrie extends Item {
 
 export class Sulfuras extends Item {
   constructor(sellIn, quality = 80) {
-    super("Sulfuras, Hand of Ragnaros", sellIn, quality);
+    super(SULFURAS_NAME, sellIn, quality);
   }
 
   updateQuality() {}
@@ -47,7 +51,7 @@ export class Sulfuras extends Item {
 
 export class BackstagePass extends Item {
   constructor(sellIn, quality) {
-    super("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
+    super(BACKSTAGE_NAME, sellIn, quality);
   }
 
   updateQuality() {

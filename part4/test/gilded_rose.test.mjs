@@ -96,18 +96,24 @@ describe("Aged Brie", () => {
   test("Aged Brie increases in quality", () => {
     const agedBrie = new AgedBrie(5, 10);
     agedBrie.updateQuality();
+    expect(agedBrie.name).to.equal("Aged Brie");
+    expect(agedBrie.sellIn).to.equal(4);
     expect(agedBrie.quality).to.equal(11);
   });
 
   test("Aged Brie increases in quality within limits", () => {
     const agedBrie = new AgedBrie(5, 50);
     agedBrie.updateQuality();
+    expect(agedBrie.name).to.equal("Aged Brie");
+    expect(agedBrie.sellIn).to.equal(4);
     expect(agedBrie.quality).to.equal(50);
   });
 
   test("Aged Brie increases in quality twice as fast after sell in", () => {
     const agedBrie = new AgedBrie(0, 10);
     agedBrie.updateQuality();
+    expect(agedBrie.name).to.equal("Aged Brie");
+    expect(agedBrie.sellIn).to.equal(-1);
     expect(agedBrie.quality).to.equal(12);
   });
 });
@@ -116,6 +122,7 @@ describe("Sulfuras, Hand of Ragnaros", () => {
   test("Sulfuras has no changes with update", () => {
     const sulfuras = new Sulfuras(5);
     sulfuras.updateQuality();
+    expect(sulfuras.name).to.equal("Sulfuras, Hand of Ragnaros");
     expect(sulfuras.sellIn).to.equal(5);
     expect(sulfuras.quality).to.equal(80);
   });
@@ -125,6 +132,8 @@ describe("Backstage passes", () => {
   test("Backstage passes increase in quality at normal rate", () => {
     const backstagePass = new BackstagePass(15, 10);
     backstagePass.updateQuality();
+    expect(backstagePass.name).to.equal("Backstage passes to a TAFKAL80ETC concert");
+    expect(backstagePass.sellIn).to.equal(14);
     expect(backstagePass.quality).to.equal(11);
   });
 
