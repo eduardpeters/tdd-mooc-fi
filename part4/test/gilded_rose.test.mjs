@@ -66,6 +66,17 @@ describe("Item quality behaviour", () => {
     expect(fooItem.sellIn).to.equal(4);
     expect(fooItem.quality).to.equal(9);
   });
+
+  test("Items do not decrease in quality below 0", () => {
+    const fooItem = new GenericItem("foo", 5, 0);
+    const barItem = new GenericItem("bar", 0, 0);
+    fooItem.updateQuality();
+    barItem.updateQuality();
+    expect(fooItem.sellIn).to.equal(4);
+    expect(fooItem.quality).to.equal(0);
+    expect(barItem.sellIn).to.equal(-1);
+    expect(barItem.quality).to.equal(0);
+  });
 });
 
 describe("Aged Brie", () => {
