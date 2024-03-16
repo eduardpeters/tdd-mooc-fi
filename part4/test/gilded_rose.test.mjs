@@ -1,6 +1,6 @@
 import { describe, test } from "vitest";
 import { expect } from "chai";
-import { Item, Shop, AgedBrie, Sulfuras, BackstagePass } from "../src/gilded_rose.mjs";
+import { Item, Shop, AgedBrie, Sulfuras, BackstagePass, GenericItem } from "../src/gilded_rose.mjs";
 
 describe("Gilded Rose", () => {
   test("Shop update quality method", () => {
@@ -55,6 +55,16 @@ describe("Gilded Rose", () => {
     expect(items[1].quality).to.equal(50);
     expect(items[2].quality).to.equal(50);
     expect(items[3].quality).to.equal(0);
+  });
+});
+
+describe("Item quality behaviour", () => {
+  test("Items are created and decrease in quality", () => {
+    const fooItem = new GenericItem("foo", 5, 10);
+    fooItem.updateQuality();
+    expect(fooItem.name).to.equal("foo");
+    expect(fooItem.sellIn).to.equal(4);
+    expect(fooItem.quality).to.equal(9);
   });
 });
 
