@@ -100,11 +100,15 @@ describe("Item quality behaviour", () => {
 
 describe("Aged Brie", () => {
   test("Aged Brie increases in quality", () => {
-    const agedBrie = new AgedBrie(5, 10);
-    agedBrie.updateQuality();
-    expect(agedBrie.name).to.equal("Aged Brie");
-    expect(agedBrie.sellIn).to.equal(4);
-    expect(agedBrie.quality).to.equal(11);
+    const agedBrie1 = new AgedBrie(5, 10);
+    const agedBrie2 = new AgedBrie(1, 10);
+    agedBrie1.updateQuality();
+    agedBrie2.updateQuality();
+    expect(agedBrie1.name).to.equal("Aged Brie");
+    expect(agedBrie1.sellIn).to.equal(4);
+    expect(agedBrie1.quality).to.equal(11);
+    expect(agedBrie2.sellIn).to.equal(0);
+    expect(agedBrie2.quality).to.equal(11);
   });
 
   test("Aged Brie increases in quality within limits", () => {
