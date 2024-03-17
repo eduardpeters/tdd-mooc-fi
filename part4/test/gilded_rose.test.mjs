@@ -1,6 +1,6 @@
 import { describe, test } from "vitest";
 import { expect } from "chai";
-import { Shop, AgedBrie, Sulfuras, BackstagePass, GenericItem } from "../src/gilded_rose.mjs";
+import { Shop, AgedBrie, Sulfuras, BackstagePass, GenericItem, ConjuredItem } from "../src/gilded_rose.mjs";
 
 describe("Gilded Rose", () => {
   test("Shop can be instantiated", () => {
@@ -182,6 +182,16 @@ describe("Backstage passes", () => {
     const backstagePass = new BackstagePass(0, 50);
     backstagePass.updateQuality();
     expect(backstagePass.quality).to.equal(0);
+  });
+});
+
+describe("Conjured item", () => {
+  test("Conjured item degrades twice as fast", () => {
+    const conjured = new ConjuredItem(5, 20);
+    conjured.updateQuality();
+    expect(conjured.name).to.equal("Conjured");
+    expect(conjured.sellIn).to.equal(4);
+    expect(conjured.quality).to.equal(18);
   });
 });
 

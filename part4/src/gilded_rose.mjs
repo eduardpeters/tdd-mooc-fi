@@ -1,6 +1,7 @@
 export const AGED_BRIE_NAME = "Aged Brie";
 export const SULFURAS_NAME = "Sulfuras, Hand of Ragnaros";
 export const BACKSTAGE_NAME = "Backstage passes to a TAFKAL80ETC concert";
+export const CONJURED_ITEM = "Conjured";
 
 class Item {
   constructor(name, sellIn, quality) {
@@ -9,6 +10,7 @@ class Item {
     this.quality = quality;
   }
 }
+
 export class GenericItem extends Item {
   constructor(name, sellIn, quality) {
     super(name, sellIn, quality);
@@ -68,6 +70,22 @@ export class BackstagePass extends Item {
       }
     } else {
       this.quality = 0;
+    }
+  }
+}
+
+export class ConjuredItem extends Item {
+  constructor(sellIn, quality) {
+    super(CONJURED_ITEM, sellIn, quality);
+  }
+
+  updateQuality() {
+    this.sellIn -= 1;
+    if (this.quality > 0) {
+      this.quality -= 2;
+    }
+    if (this.quality > 0 && this.sellIn < 0) {
+      this.quality -= 2;
     }
   }
 }
