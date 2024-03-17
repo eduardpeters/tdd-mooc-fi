@@ -3,6 +3,12 @@ import { expect } from "chai";
 import { Shop, AgedBrie, Sulfuras, BackstagePass, GenericItem } from "../src/gilded_rose.mjs";
 
 describe("Gilded Rose", () => {
+  test("Shop can be instantiated", () => {
+    const gildedRose = new Shop();
+    const items = gildedRose.updateQuality();
+    expect(items).to.deep.equal([]);
+  });
+
   test("Shop update quality method", () => {
     const gildedRose = new Shop([provideItem("foo", 0, 0), provideItem("bar", -1, 10)]);
     const items = gildedRose.updateQuality();
