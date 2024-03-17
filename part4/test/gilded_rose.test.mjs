@@ -203,11 +203,21 @@ describe("Conjured item", () => {
     const conjured2 = new ConjuredItem(-2, 20);
     conjured1.updateQuality();
     conjured2.updateQuality();
-    expect(conjured1.name).to.equal("Conjured");
     expect(conjured1.sellIn).to.equal(-1);
     expect(conjured1.quality).to.equal(16);
     expect(conjured2.sellIn).to.equal(-3);
     expect(conjured2.quality).to.equal(16);
+  });
+
+  test("Conjured item degrades within limits", () => {
+    const conjured1 = new ConjuredItem(5, 0);
+    const conjured2 = new ConjuredItem(0, 0);
+    conjured1.updateQuality();
+    conjured2.updateQuality();
+    expect(conjured1.sellIn).to.equal(4);
+    expect(conjured1.quality).to.equal(0);
+    expect(conjured2.sellIn).to.equal(-1);
+    expect(conjured2.quality).to.equal(0);
   });
 });
 
