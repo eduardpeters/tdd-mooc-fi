@@ -187,11 +187,27 @@ describe("Backstage passes", () => {
 
 describe("Conjured item", () => {
   test("Conjured item degrades twice as fast", () => {
-    const conjured = new ConjuredItem(5, 20);
-    conjured.updateQuality();
-    expect(conjured.name).to.equal("Conjured");
-    expect(conjured.sellIn).to.equal(4);
-    expect(conjured.quality).to.equal(18);
+    const conjured1 = new ConjuredItem(5, 20);
+    const conjured2 = new ConjuredItem(1, 20);
+    conjured1.updateQuality();
+    conjured2.updateQuality();
+    expect(conjured1.name).to.equal("Conjured");
+    expect(conjured1.sellIn).to.equal(4);
+    expect(conjured1.quality).to.equal(18);
+    expect(conjured2.sellIn).to.equal(0);
+    expect(conjured2.quality).to.equal(18);
+  });
+
+  test("Conjured item degrades even faster after sell in date", () => {
+    const conjured1 = new ConjuredItem(0, 20);
+    const conjured2 = new ConjuredItem(-2, 20);
+    conjured1.updateQuality();
+    conjured2.updateQuality();
+    expect(conjured1.name).to.equal("Conjured");
+    expect(conjured1.sellIn).to.equal(-1);
+    expect(conjured1.quality).to.equal(16);
+    expect(conjured2.sellIn).to.equal(-3);
+    expect(conjured2.quality).to.equal(16);
   });
 });
 
