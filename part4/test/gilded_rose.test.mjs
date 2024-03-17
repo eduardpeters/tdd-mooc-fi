@@ -145,7 +145,7 @@ describe("Backstage passes", () => {
 
   test("Backstage passes increase in quality at double rate at 10 days from sell in date", () => {
     const backstagePass1 = new BackstagePass(10, 10);
-    const backstagePass2 = new BackstagePass(8, 10);
+    const backstagePass2 = new BackstagePass(7, 10);
     const backstagePass3 = new BackstagePass(8, 50);
     backstagePass1.updateQuality();
     backstagePass2.updateQuality();
